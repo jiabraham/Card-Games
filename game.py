@@ -6,6 +6,7 @@ import actions
 import player
 import copy
 
+#Global variables, deck and cards_dealt vectors simulate a standard card deck
 deck = cards.setDeck()
 cards_dealt = cards.setCardsDealt()
 #Welcome messages
@@ -29,16 +30,18 @@ cards_dealt = cards.setCardsDealt()
 
 #Hand classify testing
 hand_vec = {}
-hand_vec[0] = "Ace of Spades"
-hand_vec[1] = "King of Spades"
-hand_vec[2] = "2 of Spades"
-hand_vec[3] = "Jack of Spades"
-hand_vec[4] = "Queen of Spades"
-hand_vec[5] = "4 of Hearts"
-hand_vec[6] = "10 of Spades"
-print(cards.classifyHand(hand_vec))
+hand_vec[0] = cards.card("Ace of Spades", 14)
+hand_vec[1] = cards.card("4 of Clubs", 4)
+hand_vec[2] = cards.card("2 of Spades", 2)
+hand_vec[3] = cards.card("5 of Diamonds", 5)
+hand_vec[4] = cards.card("Queen of Spades", 12)
+hand_vec[5] = cards.card("Ace of Hearts", 14)
+hand_vec[6] = cards.card("10 of Spades", 10)
+test_vec = cards.sortHand(hand_vec)
+for cards in test_vec:
+    print(test_vec[cards].getName())
 
-
+#UNFINISHED
 #Actual game play
 def main():
     player_number = input("How many players(2-6)? ")

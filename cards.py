@@ -11,7 +11,7 @@ class card:
         return self.name
     def setName(self, name):
         self.name = self.name + name
-    def getClassification(self, classification):
+    def getClassification(self):
         return self.classification
     def setClassification(self, classification):
         self.classification = self.classification
@@ -61,41 +61,36 @@ def draw(deck, cards_dealt):
 #Function to set the flop
 def dealFlop(deck, cards_dealt):
     pool = {}
+    burn = {}
+    burn[0] = draw(deck, cards_dealt)
     pool[0] = draw(deck, cards_dealt)
     pool[1] = draw(deck, cards_dealt)
     pool[2] = draw(deck, cards_dealt)
     return pool
 
 #Function to deal the turn card
-def dealTurn(deck, cards_dealt, pool):
+def dealTurn(deck, cards_dealt, pool, burn):
+    burn[1] = draw(deck, cards_dealt)
     pool[3] = draw(deck, cards_dealt)
     return pool
 
 #Function to deal the river card
-def dealRiver(deck, cards_deal, pool):
+def dealRiver(deck, cards_deal, pool, burn):
+    burn[2] = draw(deck, cards_dealt)
     pool[4] = draw(deck, cards_dealt)
     return pool
 
-#UNFINISHED
-#Function to rank who has the best hand at the end of a round
-#Make scalable later, for now 4 players
-def handRanking(player_vector, pool):
-    player_vector_index = 0
-    hand_rankings = {}
-    while (player_vector_index < player_vector.size()):
-        #If the player has reached the end of the final betting phase
-        if (player_vector[player_vector_index].getStatus() == 1):
-            hand_vec = player_vector[player_vector_index].getHand()
-            hand_vec[2] = pool[0]
-            hand_vec[3] = pool[1]
-            hand_vec[4] = pool[2]
-            hand_vec[5] = pool[3]
-            hand_vec[6] = pool[4]
-            handRankings[player_vector_index] = classifyHand(hand_vec)
 
-
-        player_vector_index = player_vector_index + 1
-    return "winning hand is"
+#DONE
+def sortHand(hand_vec):
+    #Quicksort later if this is causing a time issue
+    for i in range(0,7):
+        for j in range(0,7):
+            if (hand_vec[j].classification > hand_vec[i].classification):
+                temp = hand_vec[i]
+                hand_vec[i] = hand_vec[j]
+                hand_vec[j] = temp
+    return hand_vec
 
 #UNFINISHED
 def straightFlush(hand_vec):
@@ -112,7 +107,7 @@ def classifyHand(hand_vec):
     #First we should sort the hand based on values(bubble-sort of 7 elements is negligible)
     hand_vec = sortHand(hand_vec)
 
-    #Check for flush
+    #CHECK FOR FLUSH(everything that stems out of flush)
     k = 0
     hand_vec_length = len(hand_vec)
     flush_count = {}
@@ -145,18 +140,53 @@ def classifyHand(hand_vec):
         return 6
         #flush_type = straightflush(hand_vec)
 
-    #Check for straight(double loop)
-    
+    #CHECK FOR STRAIGHT(double loop)
+    #Need to edit for Ace(change classifier, add a condition, ect)?
+    straight1 = False
+    straight2 = False
+    straight3 = False
     for i in range(0, 3):
-        for j in range(i, i+5):
-            if (hand_vec[j+1].getClassification() == hand_vec[j].getClassification() + 1)
+        straight1 = True
+        straight2 = True
+        straight3 = True
+        for j in range(i+1, i+5):
+            if (test_vec[i].getClassification() + j != test_vec[j].getClassification()):
+                if (i == 0): straight1 = False
+                if (i == 1): straight2 = False
+                if (i == 2): straight3 = False
 
-def sortHand(hand_vec):
-    #Quicksort later if this is causing a time issue
-    for i in range(0,7):
-        for j in range(0,7):
-            if (hand_vec[j].classification < hand_vec[i].classification):
-                temp = hand_vec[i]
-                hand_vec[i] = hand_vec[j]
-                hand_vec[j] = temp
-    return hand_vec
+    #Consider test case:
+    if (straight3 == True):
+        print(5.3)
+    if (straight2 == True):
+        print(5.2)
+    if (straight1 == True):
+        print(5.1)
+
+    #CHECK FOR PAIR(everything that stems out of pair)
+    #first_pair will only hold a pair
+    first_pair = {}
+    #second_pair will hold 2nd pair, triplets, or 4 of kind if applicable
+    second_pair = {}
+    for i in range()
+
+#UNFINISHED
+#Function to rank who has the best hand at the end of a round
+#Make scalable later, for now 4 players
+def handRanking(player_vector, pool):
+    player_vector_index = 0
+    hand_rankings = {}
+    while (player_vector_index < player_vector.size()):
+        #If the player has reached the end of the final betting phase
+        if (player_vector[player_vector_index].getStatus() == 1):
+            hand_vec = player_vector[player_vector_index].getHand()
+            hand_vec[2] = pool[0]
+            hand_vec[3] = pool[1]
+            hand_vec[4] = pool[2]
+            hand_vec[5] = pool[3]
+            hand_vec[6] = pool[4]
+            handRankings[player_vector_index] = classifyHand(hand_vec)
+
+
+        player_vector_index = player_vector_index + 1
+    return "winning hand is"

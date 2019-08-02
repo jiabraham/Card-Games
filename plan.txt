@@ -42,22 +42,46 @@ Plan:
       >Add card to cards_dealt vector
       >Call move(for every player not folded)
       >Call End_round
-    *Hand_classification(complete later)
+    *handRanking
+      >Needs a function to find high card for hands that have equal classification
+      >Need to decode classification, maybe use dictionary to map keys to strings
+    *Hand_classification
       >Check for flush(if flush, check if straight or royal flush)
       >Check for straight(highest straight if applicable)
       >Check for pair(if pair, if pair check 2 pair, if pair
       check if 3 of kind, if 3 of kind check full house, or 4 of a kind)
       >Check for high card
       >Royal flush = 10
-      >Straight flush = 9(highest straight flush)
-      >4 of kind = 8(highest 4 of a kind)
-      >Full house = 7(highest Full house)
-      >Flush = 6(highest flush)
-      >Straight = 5(highest straight)
-      >3 of kind = 4(highest 3 of kind)
-      >2 pairs = 3 (highest 2 pair)
-      >1 pair = 2 (highest pair)
-      >High card = 1(highest card)
+      >Straight flush = 9
+      >4 of kind = 8
+      >Full house = 7
+      >Flush = 6
+        #67(flush with highest card 7)
+        #...
+      >Straight = 5
+        #55(straight ending in 5)
+        #...
+        #5A(straight ending in Ace)
+      >3 of kind = 4
+        #42(triplet comprised of 2's)
+        #43(triplet comprised of 3's)
+        #...
+        #4A(for Aces)
+      >2 pairs = 3
+        #323(for pair of 2's and pair of 3's)
+        #334(for pair of 3's and pair of 4's)
+        #...
+        #3KA
+      >1 pair = 2
+        #202(for 2's)
+        #203(for 3's)
+        #...
+        #2A(for Aces)
+      >High card = 1
+        #102(for 2, not that this is possible)
+        #103(for 3)
+        #...
+        #1A(for Ace)
   -Functions dealing with money
     *move (amount_bet)
       >Takes in string ("bet", "check", or "fold")
@@ -70,3 +94,7 @@ Plan:
       >Increment player money by pot, pot set back to zero
       >Print round winner, print how much money won
       >Give options: play another round or end game
+
+  AI opponent
+    *To be made after basic functionality is all completed and I have more
+    experience with neural nets

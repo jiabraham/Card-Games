@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 
+#DONE
 #Define class Player
 class Player:
     def __init__(self, money, name, status):

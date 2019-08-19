@@ -48,7 +48,7 @@ Plan:
     *Hand_classification
       >Check for flush(if flush, check if straight or royal flush)
       >Check for straight(highest straight if applicable)
-      >Check for pair(if pair, if pair check 2 pair, if pair
+      >Check for pair(if pair, if pair check 2 pair, if 2 pair
       check if 3 of kind, if 3 of kind check full house, or 4 of a kind)
       >Check for high card
       >Royal flush = 10
@@ -61,27 +61,27 @@ Plan:
       >Straight = 5
         #55(straight ending in 5)
         #...
-        #5A(straight ending in Ace)
+        #514(straight ending in Ace)
       >3 of kind = 4
-        #42(triplet comprised of 2's)
-        #43(triplet comprised of 3's)
+        #420(triplet comprised of 2's)
+        #430(triplet comprised of 3's)
         #...
-        #4A(for Aces)
+        #414(for Aces)
       >2 pairs = 3
-        #323(for pair of 2's and pair of 3's)
-        #334(for pair of 3's and pair of 4's)
+        #32233(for pair of 2's and pair of 3's)
+        #33344(for pair of 3's and pair of 4's)
         #...
-        #3KA
+        #31314(for pair of K's and pair of A's)
       >1 pair = 2
         #202(for 2's)
         #203(for 3's)
         #...
-        #2A(for Aces)
+        #214(for Aces)
       >High card = 1
         #102(for 2, not that this is possible)
         #103(for 3)
         #...
-        #1A(for Ace)
+        #114(for Ace)
   -Functions dealing with money
     *move (amount_bet)
       >Takes in string ("bet", "check", or "fold")
@@ -95,6 +95,12 @@ Plan:
       >Print round winner, print how much money won
       >Give options: play another round or end game
 
-  AI opponent
+  Simple Bot
+    *Scoring matrix, calculates all the possibilities other person has from 22-AA
+    *Calculates probability of each of those
+    *How to factor in amount bet?
+    *Calculate expected bet for someone who has a certain hand based on hand
+    *Bluff factor? (keep track of last 10 hands?)
+  AI Reinforcement Learning Bot
     *To be made after basic functionality is all completed and I have more
     experience with neural nets

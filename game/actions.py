@@ -38,7 +38,7 @@ def bet(Player, amount):
     Player.setMoney(amount, -1)
     return amount
 
-
+#UNFINISHED
 #This function defines reraise(may not be used)
 def reraise(Player, amount, amount_bet):
     while (amount > Player.getMoney() or amount < amount_bet):
@@ -48,7 +48,7 @@ def reraise(Player, amount, amount_bet):
     Player.setMoney(amount, -1)
     return amount
 
-#UNFINISHED, needs testing
+#Needs testing
 #This function defines the end of the round in which someone has won
 def endRound(pool, player_vector, more_than_one_player, pot):
     if (more_than_one_player):

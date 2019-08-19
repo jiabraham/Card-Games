@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-import math
-import random
-import cards
 import actions
-import player
+import cards
 import copy
+import math
+import player
+import random
+
 
 #Global variables, deck and cards_dealt vectors simulate a standard card deck
 deck = cards.setDeck()
@@ -14,30 +15,18 @@ cards_dealt = cards.setCardsDealt()
 #Enter how many players
 
 
-#Function Testing
-# Player1 = player.Player(5000)
-# Player2 = player.Player(5000)
-# Player1.hand[0] = cards.draw(deck, cards_dealt, False)
-# Player1.hand[1] = cards.draw(deck, cards_dealt, False)
-# vec1 = Player1.getHand()
-# print("Player1: " + vec1[0] + " " + vec1[1])
-# Player2.hand[0] = cards.draw(deck, cards_dealt, False)
-# Player2.hand[1] = cards.draw(deck, cards_dealt, False)
-# vec2 = Player2.getHand()
-# print(Player2.hand[0])
-# print(Player2.hand[1])
-# print("Player2: " + vec2[0] + " " + vec2[1])
-
 #Hand classify testing
 hand_vec = {}
-hand_vec[0] = cards.card("Ace of Spades", 14)
+hand_vec[0] = cards.card("6 of spades", 6)
 hand_vec[1] = cards.card("4 of Clubs", 4)
 hand_vec[2] = cards.card("2 of Spades", 2)
 hand_vec[3] = cards.card("5 of Diamonds", 5)
 hand_vec[4] = cards.card("Queen of Spades", 12)
-hand_vec[5] = cards.card("Ace of Hearts", 14)
+hand_vec[5] = cards.card("3 of Hearts", 3)
 hand_vec[6] = cards.card("10 of Spades", 10)
 test_vec = cards.sortHand(hand_vec)
+score = cards.classifyHand(test_vec)
+
 for cards in test_vec:
     print(test_vec[cards].getName())
 
@@ -61,6 +50,7 @@ def main():
         player_number = int(input("Invalid input, please choose positive number from 1 to 1000000: "))
     print("Then let's get started!")
 
+    #DONE
     #Player vector
     player_vector = {}
     #Declare number of players(loop through if you want after finished)

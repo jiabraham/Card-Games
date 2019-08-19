@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 import math
-import random
 import player
+import random
+
 
 class card:
     def __init__(self, name, classification):
@@ -80,7 +81,6 @@ def dealRiver(deck, cards_deal, pool, burn):
     pool[4] = draw(deck, cards_dealt)
     return pool
 
-
 #DONE
 def sortHand(hand_vec):
     #Quicksort later if this is causing a time issue
@@ -93,22 +93,8 @@ def sortHand(hand_vec):
     return hand_vec
 
 #UNFINISHED
-def straightFlush(hand_vec):
-    #given flush
-    #if normal flush return 0
-    #if straight flush return 1
-    #if royal flush return 2
-    return 0
-
-#UNFINISHED
-#Function to return a hand ranking 1-10
-#May have to edit later to include high card to differentiate same ranking
-def classifyHand(hand_vec):
-    #First we should sort the hand based on values(bubble-sort of 7 elements is negligible)
-    hand_vec = sortHand(hand_vec)
-
+def flush(hand_vec):
     #CHECK FOR FLUSH(everything that stems out of flush)
-    k = 0
     hand_vec_length = len(hand_vec)
     flush_count = {}
     flush_count["spades"] = 0
@@ -117,6 +103,7 @@ def classifyHand(hand_vec):
     flush_count["diamonds"] = 0
     flush = False
 
+    k = 0
     #Loop once through hand to count the number of each suit
     while (k < hand_vec_length):
         if (hand_vec[k][-6:] == "Spades"):
@@ -135,11 +122,10 @@ def classifyHand(hand_vec):
             flush_count["diamonds"] = flush_count["diamonds"] + 1
             if (flush_count["diamonds"] > 4):
                 flush  = True
-    #Must calculate the highest flush either here or in handRanking
-    if (flush):
-        return 6
-        #flush_type = straightflush(hand_vec)
+    return 0
 
+#UNFINISHED
+def straight(hand_vec):
     #CHECK FOR STRAIGHT(double loop)
     #Need to edit for Ace(change classifier, add a condition, ect)?
     straight1 = False
@@ -163,12 +149,30 @@ def classifyHand(hand_vec):
     if (straight1 == True):
         print(5.1)
 
+#UNIFINISHED
+def multiple(hand_vec):
     #CHECK FOR PAIR(everything that stems out of pair)
     #first_pair will only hold a pair
     first_pair = {}
-    #second_pair will hold 2nd pair, triplets, or 4 of kind if applicable
+    for i in range(0, 7):
+        for j in range (i+1, 7):
+            if (hand_vec[i].getClassification() == hand_vec[j].getClassification()) {
+                first_pair[]
+            }
+    #second_pair will hold 2nd pair, triplets, or 4 of kind
     second_pair = {}
-    for i in range()
+
+
+#UNFINISHED
+#Function to return a hand ranking 1-10
+#May have to edit later to include high card to differentiate same ranking
+def classifyHand(hand_vec):
+    hand_vec = sortHand(hand_vec)
+
+
+
+
+
 
 #UNFINISHED
 #Function to rank who has the best hand at the end of a round

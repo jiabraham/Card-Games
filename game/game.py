@@ -27,6 +27,7 @@ hand_vec[6] = cards.card("10 of Spades", 10)
 test_vec = cards.sortHand(hand_vec)
 histogram = cards.multiple(test_vec)
 
+#Print histogram/classification(strings not integers)
 for i in range(0, 15):
     print(histogram[i])
 

@@ -151,7 +151,19 @@ def straight(hand_vec):
 
 #UNIFINISHED
 def multiple(hand_vec):
-    #Declare hand histogram and set initial values(with padding)
+    #Declare best score variable
+    #May want to make this an object to keep a string representation
+    best_score = ""
+
+    #booleans for different types of multiples (may not need all of these)
+    pair = False
+    two_pair = False
+    triplets = False
+    full_house = False
+    quadruples = False
+    
+    
+    #Declare hand histogram vector and set initial values(with padding)
     histogram = {}
     for i in range(0, 15):
         histogram[i] = 0
@@ -159,7 +171,19 @@ def multiple(hand_vec):
     for i in range(0, 7):
         histogram[hand_vec[i].getClassification()] += 1
 
-    return histogram
+    for i in range(0, 15):
+        if (histogram[i] == 0):
+            continue
+        if (histogram[i] == 2):
+            if (two_pair == True):
+                best_score += 
+            if (pair == True):
+                best_score += str(i)
+                two_pair = True 
+                continue
+            best_score = "2" + str(i)
+            pair = True 
+        if (histogram[])
 
 
 

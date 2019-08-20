@@ -97,30 +97,30 @@ def flush(hand_vec):
     #CHECK FOR FLUSH(everything that stems out of flush)
     hand_vec_length = len(hand_vec)
     flush_count = {}
-    flush_count["spades"] = 0
-    flush_count["hearts"] = 0
-    flush_count["clubs"] = 0
-    flush_count["diamonds"] = 0
+    flush_count["Spades"] = 0
+    flush_count["Hearts"] = 0
+    flush_count["Clubs"] = 0
+    flush_count["Diamonds"] = 0
     flush = False
 
     k = 0
     #Loop once through hand to count the number of each suit
     while (k < hand_vec_length):
         if (hand_vec[k][-6:] == "Spades"):
-            flush_count["spades"] = flush_count["spades"] + 1
-            if (flush_count["spades"] > 4):
+            flush_count["Spades"] = flush_count["Spades"] + 1
+            if (flush_count["Spades"] > 4):
                 flush  = True
         if (hand_vec[k][-6:] == "Hearts"):
-            flush_count["hearts"] = flush_count["hearts"] + 1
-            if (flush_count["hearts"] > 4):
+            flush_count["Hearts"] = flush_count["Hearts"] + 1
+            if (flush_count["Hearts"] > 4):
                 flush  = True
         if (hand_vec[k][-5:] == "Clubs"):
-            flush_count["clubs"] = flush_count["clubs"] + 1
-            if (flush_count["clubs"] > 4):
+            flush_count["Clubs"] = flush_count["Clubs"] + 1
+            if (flush_count["Clubs"] > 4):
                 flush  = True
         if (hand_vec[k][-8:] == "Diamonds"):
-            flush_count["diamonds"] = flush_count["diamonds"] + 1
-            if (flush_count["diamonds"] > 4):
+            flush_count["Diamonds"] = flush_count["Diamonds"] + 1
+            if (flush_count["Diamonds"] > 4):
                 flush  = True
     return 0
 
@@ -151,16 +151,17 @@ def straight(hand_vec):
 
 #UNIFINISHED
 def multiple(hand_vec):
-    #CHECK FOR PAIR(everything that stems out of pair)
-    #first_pair will only hold a pair
-    first_pair = {}
+    #Declare hand histogram and set initial values(with padding)
+    histogram = {}
+    for i in range(0, 15):
+        histogram[i] = 0
+
     for i in range(0, 7):
-        for j in range (i+1, 7):
-            if (hand_vec[i].getClassification() == hand_vec[j].getClassification()) {
-                first_pair[]
-            }
-    #second_pair will hold 2nd pair, triplets, or 4 of kind
-    second_pair = {}
+        histogram[hand_vec[i].getClassification()] += 1
+
+    return histogram
+
+
 
 
 #UNFINISHED

@@ -108,30 +108,29 @@ def flush(hand_vec):
     flush_count["Clubs"] = 0
     flush_count["Diamonds"] = 0
     flush = False
-    best_score = "";
+    best_score = "0";
 
-    k = 0
     #Loop once through hand to count the number of each suit
-    while (k < 7):
-        if (hand_vec[k][-6:] == "Spades"):
+    for k in range(0, 7):
+        if (hand_vec[k].getName()[-6:] == "Spades"):
             flush_count["Spades"] += 1
             if (flush_count["Spades"] > 4):
-                best_score = "6" + str(i)
+                best_score = "6" + str(hand_vec[k].getClassification())
                 flush  = True
-        if (hand_vec[k][-6:] == "Hearts"):
+        if (hand_vec[k].getName()[-6:] == "Hearts"):
             flush_count["Hearts"] += 1
             if (flush_count["Hearts"] > 4):
-                best_score = "6" + str(i)
+                best_score = "6" + str(hand_vec[k].getClassification())
                 flush  = True
-        if (hand_vec[k][-5:] == "Clubs"):
+        if (hand_vec[k].getName()[-5:] == "Clubs"):
             flush_count["Clubs"] += 1
             if (flush_count["Clubs"] > 4):
-                best_score = "6" + str(i)
+                best_score = "6" + str(hand_vec[k].getClassification())
                 flush  = True
-        if (hand_vec[k][-8:] == "Diamonds"):
+        if (hand_vec[k].getName()[-8:] == "Diamonds"):
             flush_count["Diamonds"] += 1
             if (flush_count["Diamonds"] > 4):
-                best_score = "6" + str(i)
+                best_score = "6" + str(hand_vec[k].getClassification())
                 flush  = True
     return best_score
 
@@ -142,7 +141,7 @@ def straight(hand_vec):
 
     #Declare counter and best_score
     straight_counter = 1
-    best_score = 0
+    best_score = "0"
     for i in range(0, 6):
         if (hand_vec[i].getClassification() == hand_vec[i+1].getClassification()):
             continue
@@ -162,7 +161,7 @@ def multiple(hand_vec):
 
     #Declare best score variable
     #May want to make this an object to keep a string representation
-    best_score = ""
+    best_score = "0"
 
     #booleans for different types of multiples (may not need all of these)
     pair = False
@@ -236,7 +235,33 @@ def multiple(hand_vec):
 #Function to return a hand ranking 1-10
 #May have to edit later to include high card to differentiate same ranking
 def classifyHand(hand_vec):
+    best_score = 0
     hand_vec = sortHand(hand_vec)
+
+    #Need to return actual vectors to check for straight flush
+    best_score_multiple = multiple(hand_vec)
+    best_score_straight = straight(hand_vec)
+    best_score_flush = flush(hand_vec)
+
+    print("best_multiple = " + best_score_multiple)
+    print("best_score_straight = " + best_score_straight)
+    print("best_score_flush = " + best_score_flush)
+
+    #Need to put checks in place for royal flush
+    if (int(best_score_multiple[0:1]) > int(best_score_straight[0:1])):
+        best_score = best_score_multiple
+    else:
+        best_score = best_score_straight
+    if (int(best_score[0:1]) < int(best_score_flush[0:1])):
+        best_score = best_score_flush
+    if (best_score_straight and best_score_flush):
+        if (best_score_straight[1:3] == "14"):
+            best_score = "10"
+        else:
+            best_score = "9" + best_score_straight[1:3]
+
+    return best_score
+
 
 
 

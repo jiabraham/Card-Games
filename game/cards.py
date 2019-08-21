@@ -149,8 +149,16 @@ def straight(hand_vec):
     if (straight1 == True):
         print(5.1)
 
+def convertToMultiple(num):
+    if (len(str(num)) != 2):
+        num = "0" + str(num)
+    else:
+        num = str(num)
+    return num
+
 #UNIFINISHED
 def multiple(hand_vec):
+
     #Declare best score variable
     #May want to make this an object to keep a string representation
     best_score = ""
@@ -161,8 +169,8 @@ def multiple(hand_vec):
     triplets = False
     full_house = False
     quadruples = False
-    
-    
+
+
     #Declare hand histogram vector and set initial values(with padding)
     histogram = {}
     for i in range(0, 15):
@@ -171,19 +179,54 @@ def multiple(hand_vec):
     for i in range(0, 7):
         histogram[hand_vec[i].getClassification()] += 1
 
+    #return histogram
+    #Need to consider every possible outcome for frequencies (1-4)
     for i in range(0, 15):
         if (histogram[i] == 0):
             continue
         if (histogram[i] == 2):
-            if (two_pair == True):
-                best_score += 
-            if (pair == True):
-                best_score += str(i)
-                two_pair = True 
+            if (quadruples):
                 continue
-            best_score = "2" + str(i)
-            pair = True 
-        if (histogram[])
+            if (full_house):
+                best_score = "7" + best_score[3:]
+            if (triplets):
+                best_score = "7" + convertToMultiple(i) + best_score[1:]
+                full_house = True
+                continue
+            if (two_pair):
+                best_score = "3" + best_score[3:5] + convertToMultiple(i)
+                continue
+            if (pair):
+                best_score = "3" + best_score[1:3] + convertToMultiple(i)
+                two_pair = True
+                continue
+            best_score = "2" + convertToMultiple(i)
+            pair = True
+        if (histogram[i] == 3):
+            if (quadruples):
+                continue
+            if (two_pair):
+                best_score = "7" + best_score[3:5] + convertToMultiple(i)
+                full_house = True
+                continue
+            if (pair):
+                best_score = "7" + convertToMultiple(i) + best_score[1:]
+                full_house = True
+                continue
+            if (triplets):
+                best_score = "3" + convertToMultiple(i)
+                triplets = True
+                continue
+            else:
+                best_score = "3" + convertToMultiple(i)
+                triplets = True
+                continue
+        if (histogram[i] == 4):
+            best_score = "8" + convertToMultiple(i)
+            quadruples = True
+    if (best_score == ""):
+        best_score = "1" + str(hand_vec[6].getClassification())
+    return best_score
 
 
 

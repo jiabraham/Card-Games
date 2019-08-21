@@ -42,46 +42,47 @@ Plan:
       >Add card to cards_dealt vector
       >Call move(for every player not folded)
       >Call End_round
-    *handRanking
-      >Needs a function to find high card for hands that have equal classification
-      >Need to decode classification, maybe use dictionary to map keys to strings
-    *Hand_classification
-      >Check for flush(if flush, check if straight or royal flush)
-      >Check for straight(highest straight if applicable)
-      >Check for pair(if pair, if pair check 2 pair, if 2 pair
-      check if 3 of kind, if 3 of kind check full house, or 4 of a kind)
-      >Check for high card
-      >Royal flush = 10
-      >Straight flush = 9
-      >4 of kind = 8
-      >Full house = 7
-      >Flush = 6
-        #67(flush with highest card 7)
-        #...
-      >Straight = 5
-        #55(straight ending in 5)
-        #...
-        #514(straight ending in Ace)
-      >3 of kind = 4
-        #420(triplet comprised of 2's)
-        #430(triplet comprised of 3's)
-        #...
-        #414(for Aces)
-      >2 pairs = 3
-        #32233(for pair of 2's and pair of 3's)
-        #33344(for pair of 3's and pair of 4's)
-        #...
-        #31314(for pair of K's and pair of A's)
-      >1 pair = 2
-        #202(for 2's)
-        #203(for 3's)
-        #...
-        #214(for Aces)
-      >High card = 1
-        #102(for 2, not that this is possible)
-        #103(for 3)
-        #...
-        #114(for Ace)
+    -Hand Classification
+      *handRanking
+        >Needs a function to find high card for hands that have equal classification
+        >Need to decode classification, maybe use dictionary to map keys to strings
+      *Hand_classification
+        >Check for flush(if flush, check if straight or royal flush)
+        >Check for straight(highest straight if applicable)
+        >Check for pair(if pair, if pair check 2 pair, if 2 pair
+        check if 3 of kind, if 3 of kind check full house, or 4 of a kind)
+        >Check for high card
+        >Royal flush = 10
+        >Straight flush = 9
+        >4 of kind = 8
+        >Full house = 7
+        >Flush = 6
+          #67(flush with highest card 7)
+          #...
+        >Straight = 5
+          #55(straight ending in 5)
+          #...
+          #514(straight ending in Ace)
+        >3 of kind = 4
+          #420(triplet comprised of 2's)
+          #430(triplet comprised of 3's)
+          #...
+          #414(for Aces)
+        >2 pairs = 3
+          #32233(for pair of 2's and pair of 3's)
+          #33344(for pair of 3's and pair of 4's)
+          #...
+          #31314(for pair of K's and pair of A's)
+        >1 pair = 2
+          #202(for 2's)
+          #203(for 3's)
+          #...
+          #214(for Aces)
+        >High card = 1
+          #102(for 2, not that this is possible)
+          #103(for 3)
+          #...
+          #114(for Ace)
   -Functions dealing with money
     *move (amount_bet)
       >Takes in string ("bet", "check", or "fold")

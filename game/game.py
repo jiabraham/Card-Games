@@ -17,19 +17,20 @@ cards_dealt = cards.setCardsDealt()
 
 #Hand classify testing
 hand_vec = {}
-hand_vec[0] = cards.card("6 of Spades", 6)
-hand_vec[1] = cards.card("4 of Clubs", 4)
-hand_vec[2] = cards.card("6 of Diamonds", 6)
-hand_vec[3] = cards.card("5 of Diamonds", 5)
-hand_vec[4] = cards.card("Queen of Spades", 12)
-hand_vec[5] = cards.card("3 of Hearts", 3)
-hand_vec[6] = cards.card("10 of Spades", 10)
+hand_vec[0] = cards.draw(deck, cards_dealt)
+hand_vec[1] = cards.draw(deck, cards_dealt)
+hand_vec[2] = cards.draw(deck, cards_dealt)
+hand_vec[3] = cards.draw(deck, cards_dealt)
+hand_vec[4] = cards.draw(deck, cards_dealt)
+hand_vec[5] = cards.draw(deck, cards_dealt)
+hand_vec[6] = cards.draw(deck, cards_dealt)
 test_vec = cards.sortHand(hand_vec)
-histogram = cards.multiple(test_vec)
 
-#Print histogram/classification(strings not integers)
-for i in range(0, 15):
-    print(histogram[i])
+best_score = cards.multiple(test_vec)
+
+for i in range(0, 7):
+    print(hand_vec[i].getName())
+print(best_score)
 
 #UNFINISHED
 #Actual game play

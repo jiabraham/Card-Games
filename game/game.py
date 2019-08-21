@@ -17,19 +17,25 @@ cards_dealt = cards.setCardsDealt()
 
 #Hand classify testing
 hand_vec = {}
-hand_vec[0] = cards.draw(deck, cards_dealt)
-hand_vec[1] = cards.draw(deck, cards_dealt)
-hand_vec[2] = cards.draw(deck, cards_dealt)
-hand_vec[3] = cards.draw(deck, cards_dealt)
-hand_vec[4] = cards.draw(deck, cards_dealt)
-hand_vec[5] = cards.draw(deck, cards_dealt)
-hand_vec[6] = cards.draw(deck, cards_dealt)
+# hand_vec[0] = cards.draw(deck, cards_dealt)
+# hand_vec[1] = cards.draw(deck, cards_dealt)
+# hand_vec[2] = cards.draw(deck, cards_dealt)
+# hand_vec[3] = cards.draw(deck, cards_dealt)
+# hand_vec[4] = cards.draw(deck, cards_dealt)
+# hand_vec[5] = cards.draw(deck, cards_dealt)
+# hand_vec[6] = cards.draw(deck, cards_dealt)
+hand_vec[0] = cards.card("Queen of Spades", 12)
+hand_vec[1] = cards.card("5 of Spades", 5)
+hand_vec[2] = cards.card("8 of Hearts", 8)
+hand_vec[3] = cards.card("9 of Clubs", 9)
+hand_vec[4] = cards.card("6 of Spades", 6)
+hand_vec[5] = cards.card("7 of Diamonds", 7)
+hand_vec[6] = cards.card("King of Clubs", 13)
 test_vec = cards.sortHand(hand_vec)
 
-best_score = cards.multiple(test_vec)
+best_score = cards.straight(test_vec)
 
-for i in range(0, 7):
-    print(hand_vec[i].getName())
+
 print(best_score)
 
 #UNFINISHED

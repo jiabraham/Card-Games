@@ -101,50 +101,61 @@ def convertToMultiple(num):
 
 #UNFINISHED
 def flush(hand_vec):
-    #CHECK FOR FLUSH(everything that stems out of flush)
-    hand_vec_length = len(hand_vec)
+    #CHECK FOR FLUSH
     flush_count = {}
     flush_count["Spades"] = 0
     flush_count["Hearts"] = 0
     flush_count["Clubs"] = 0
     flush_count["Diamonds"] = 0
     flush = False
+    best_score = "";
 
     k = 0
     #Loop once through hand to count the number of each suit
-    while (k < hand_vec_length):
+    while (k < 7):
         if (hand_vec[k][-6:] == "Spades"):
-            flush_count["Spades"] = flush_count["Spades"] + 1
+            flush_count["Spades"] += 1
             if (flush_count["Spades"] > 4):
+                best_score = "6" + str(i)
                 flush  = True
         if (hand_vec[k][-6:] == "Hearts"):
-            flush_count["Hearts"] = flush_count["Hearts"] + 1
+            flush_count["Hearts"] += 1
             if (flush_count["Hearts"] > 4):
+                best_score = "6" + str(i)
                 flush  = True
         if (hand_vec[k][-5:] == "Clubs"):
-            flush_count["Clubs"] = flush_count["Clubs"] + 1
+            flush_count["Clubs"] += 1
             if (flush_count["Clubs"] > 4):
+                best_score = "6" + str(i)
                 flush  = True
         if (hand_vec[k][-8:] == "Diamonds"):
-            flush_count["Diamonds"] = flush_count["Diamonds"] + 1
+            flush_count["Diamonds"] += 1
             if (flush_count["Diamonds"] > 4):
+                best_score = "6" + str(i)
                 flush  = True
-    return 0
+    return best_score
 
 #UNFINISHED
 def straight(hand_vec):
-    #CHECK FOR STRAIGHT(double loop)
     #Need to edit for Ace(change classifier, add a condition, ect)?
+
+
+    #Declare counter and best_score
     straight_counter = 1
     best_score = 0
-
     for i in range(0, 6):
-        if (hand_vec[i].getClassification() + 1 = hand_vec[i].getClassification()):
+        if (hand_vec[i].getClassification() == hand_vec[i+1].getClassification()):
+            continue
+        if (hand_vec[i].getClassification() + 1 == hand_vec[i+1].getClassification()):
             straight_counter += 1
         else:
             straight_counter = 1
+        if (straight_counter == 4 and hand_vec[i].getClassification() == 4):
+            if (hand_vec[4].getClassification() == 14 or hand_vec[5].getClassification() == 14 or hand_vec[6].getClassification() == 14):
+                best_score = "505"
         if (straight_counter > 4):
-            best_score = "5" + convertToMultiple(i)
+            best_score = "5" + convertToMultiple(hand_vec[i+1].getClassification())
+    return best_score
 
 #UNIFINISHED
 def multiple(hand_vec):

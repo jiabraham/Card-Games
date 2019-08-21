@@ -92,6 +92,13 @@ def sortHand(hand_vec):
                 hand_vec[j] = temp
     return hand_vec
 
+def convertToMultiple(num):
+    if (len(str(num)) != 2):
+        num = "0" + str(num)
+    else:
+        num = str(num)
+    return num
+
 #UNFINISHED
 def flush(hand_vec):
     #CHECK FOR FLUSH(everything that stems out of flush)
@@ -128,33 +135,16 @@ def flush(hand_vec):
 def straight(hand_vec):
     #CHECK FOR STRAIGHT(double loop)
     #Need to edit for Ace(change classifier, add a condition, ect)?
-    straight1 = False
-    straight2 = False
-    straight3 = False
-    for i in range(0, 3):
-        straight1 = True
-        straight2 = True
-        straight3 = True
-        for j in range(i+1, i+5):
-            if (test_vec[i].getClassification() + j != test_vec[j].getClassification()):
-                if (i == 0): straight1 = False
-                if (i == 1): straight2 = False
-                if (i == 2): straight3 = False
+    straight_counter = 1
+    best_score = 0
 
-    #Consider test case:
-    if (straight3 == True):
-        print(5.3)
-    if (straight2 == True):
-        print(5.2)
-    if (straight1 == True):
-        print(5.1)
-
-def convertToMultiple(num):
-    if (len(str(num)) != 2):
-        num = "0" + str(num)
-    else:
-        num = str(num)
-    return num
+    for i in range(0, 6):
+        if (hand_vec[i].getClassification() + 1 = hand_vec[i].getClassification()):
+            straight_counter += 1
+        else:
+            straight_counter = 1
+        if (straight_counter > 4):
+            best_score = "5" + convertToMultiple(i)
 
 #UNIFINISHED
 def multiple(hand_vec):

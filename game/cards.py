@@ -16,6 +16,7 @@ class card:
         return self.classification
     def setClassification(self, classification):
         self.classification = self.classification
+
 #Function to create and set dictionary to hold cards
 def setDeck():
     deck = {}
@@ -83,7 +84,7 @@ def dealRiver(deck, cards_deal, pool, burn):
 
 #DONE
 def sortHand(hand_vec):
-    #Quicksort later if this is causing a time issue
+    #Simple sort for only 7 elements
     for i in range(0,7):
         for j in range(0,7):
             if (hand_vec[j].classification > hand_vec[i].classification):
@@ -100,7 +101,6 @@ def convertToMultiple(num):
     return num
 
 def flush(hand_vec):
-    #CHECK FOR FLUSH
     best_score = "0";
 
     spades_vec = {}
@@ -165,12 +165,11 @@ def flush(hand_vec):
     return best_score
 
 def straight(hand_vec):
-    #Need to edit for Ace(change classifier, add a condition, ect)?
-
 
     #Declare counter and best_score
     straight_counter = 1
     best_score = "0"
+
     for i in range(0, len(hand_vec)-1):
         if (hand_vec[i].getClassification() == hand_vec[i+1].getClassification()):
             continue
@@ -296,8 +295,10 @@ def handRanking(player_vector, pool):
 
     player_vector_index = 0
     hand_rankings = {}
+    best_hand = {}
+
     while (player_vector_index < player_vector.size()):
-        #If the player has reached the end of the final betting phase
+        #If players have reached the end of the final betting phase
         if (player_vector[player_vector_index].getStatus() == 1):
             hand_vec = player_vector[player_vector_index].getHand()
             hand_vec[2] = pool[0]
@@ -305,13 +306,20 @@ def handRanking(player_vector, pool):
             hand_vec[4] = pool[2]
             hand_vec[5] = pool[3]
             hand_vec[6] = pool[4]
-            handRankings[player_vector_index] = classifyHand(hand_vec)
+            hand_rankings[player_vector_index] = classifyHand(hand_vec)
 
 
-        player_vector_index = player_vector_index + 1
+        player_vector_index += 1
 
     #Double loop to compare each letter of each classification
-    for i in range(0, len(handRankings)):
-        for j in range(0, 5):
+    best_hand[0] = hand_rankings[0]
+    best_hand_counter = 0
+    for j in range(0, 3):
+        for i in range(1, len(hand_rankings)):
+            if (int(best_hand[0][0:1]) > int(hand_rankings[i][0:1])):
+                best_hand[0] = hand_rankings[i]
+                best_hand_counter = 0
+            if (int())
 
     return "winning hand is"
+1

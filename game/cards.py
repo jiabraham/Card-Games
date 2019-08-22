@@ -293,6 +293,7 @@ def classifyHand(hand_vec):
 #Function to rank who has the best hand at the end of a round
 #Make scalable later, for now 4 players
 def handRanking(player_vector, pool):
+
     player_vector_index = 0
     hand_rankings = {}
     while (player_vector_index < player_vector.size()):
@@ -308,4 +309,9 @@ def handRanking(player_vector, pool):
 
 
         player_vector_index = player_vector_index + 1
+
+    #Double loop to compare each letter of each classification
+    for i in range(0, len(handRankings)):
+        for j in range(0, 5):
+
     return "winning hand is"

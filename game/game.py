@@ -26,16 +26,16 @@ hand_vec = {}
 # hand_vec[6] = cards.draw(deck, cards_dealt)
 hand_vec[0] = cards.card("7 of Diamonds", 7)
 hand_vec[1] = cards.card("Jack of Diamonds", 11)
-hand_vec[2] = cards.card("9 of Clubs", 9)
-hand_vec[3] = cards.card("4 of Diamonds", 4)
-hand_vec[4] = cards.card("10 of Hearts", 10)
+hand_vec[2] = cards.card("9 of Diamonds", 9)
+hand_vec[3] = cards.card("Ace of Diamonds", 14)
+hand_vec[4] = cards.card("10 of Diamonds", 10)
 hand_vec[5] = cards.card("Queen of Diamonds", 12)
 hand_vec[6] = cards.card("King of Diamonds", 13)
 
 best_score = cards.classifyHand(hand_vec)
 
 
-print(best_score)
+print("best_score = " + best_score)
 
 #UNFINISHED
 #Actual game play

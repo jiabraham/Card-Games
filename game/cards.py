@@ -99,15 +99,8 @@ def convertToMultiple(num):
         num = str(num)
     return num
 
-#UNFINISHED
 def flush(hand_vec):
     #CHECK FOR FLUSH
-    flush_count = {}
-    flush_count["Spades"] = 0
-    flush_count["Hearts"] = 0
-    flush_count["Clubs"] = 0
-    flush_count["Diamonds"] = 0
-    flush = False
     best_score = "0";
 
     spades_vec = {}
@@ -123,9 +116,9 @@ def flush(hand_vec):
     #Loop once through hand to count the number of each suit
     for k in range(0, 7):
         if (hand_vec[k].getName()[-6:] == "Spades"):
-            flush_count["Spades"] += 1
             spades_vec[spades_vec_counter] = hand_vec[k]
-            if (flush_count["Spades"] > 4):
+            spades_vec_counter += 1
+            if (spades_vec_counter > 3):
                 straight_flush = straight(spades_vec)
                 if (straight_flush):
                     best_score = "9" + straight_flush[1:3]
@@ -134,9 +127,9 @@ def flush(hand_vec):
                 flush  = True
 
         if (hand_vec[k].getName()[-6:] == "Hearts"):
-            flush_count["Hearts"] += 1
             hearts_vec[hearts_vec_counter] = hand_vec[k]
-            if (flush_count["Hearts"] > 4):
+            hearts_vec_counter += 1
+            if (hearts_vec_counter > 3):
                 straight_flush = straight(hearts_vec)
                 if (straight_flush):
                     best_score = "9" + straight_flush[1:3]
@@ -145,9 +138,9 @@ def flush(hand_vec):
                 flush  = True
 
         if (hand_vec[k].getName()[-5:] == "Clubs"):
-            flush_count["Clubs"] += 1
             clubs_vec[clubs_vec_counter] = hand_vec[k]
-            if (flush_count["Clubs"] > 4):
+            clubs_vec_counter += 1
+            if (clubs_vec_counter > 3):
                 straight_flush = straight(clubs_vec)
                 if (straight_flush):
                     best_score = "9" + straight_flush[1:3]
@@ -156,10 +149,9 @@ def flush(hand_vec):
                 flush  = True
 
         if (hand_vec[k].getName()[-8:] == "Diamonds"):
-            flush_count["Diamonds"] += 1
             diamonds_vec[diamonds_vec_counter] = hand_vec[k]
             diamonds_vec_counter += 1
-            if (flush_count["Diamonds"] > 4):
+            if (diamonds_vec_counter > 3):
                 straight_flush = straight(diamonds_vec)
 
                 print("straight_flush = " + straight_flush)
@@ -172,7 +164,6 @@ def flush(hand_vec):
                 flush  = True
     return best_score
 
-#UNFINISHED
 def straight(hand_vec):
     #Need to edit for Ace(change classifier, add a condition, ect)?
 
@@ -194,7 +185,6 @@ def straight(hand_vec):
             best_score = "5" + convertToMultiple(hand_vec[i+1].getClassification())
     return best_score
 
-#UNIFINISHED
 def multiple(hand_vec):
 
     #Declare best score variable
@@ -266,10 +256,6 @@ def multiple(hand_vec):
         best_score = "1" + str(hand_vec[6].getClassification())
     return best_score
 
-
-
-
-#UNFINISHED
 #Function to return a hand ranking 1-10
 #May have to edit later to include high card to differentiate same ranking
 def classifyHand(hand_vec):

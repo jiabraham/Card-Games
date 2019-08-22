@@ -29,7 +29,7 @@ hand_vec[1] = cards.card("Jack of Diamonds", 11)
 hand_vec[2] = cards.card("9 of Diamonds", 9)
 hand_vec[3] = cards.card("Ace of Diamonds", 14)
 hand_vec[4] = cards.card("10 of Diamonds", 10)
-hand_vec[5] = cards.card("Queen of Diamonds", 12)
+hand_vec[5] = cards.card("Queen of Spades", 12)
 hand_vec[6] = cards.card("King of Diamonds", 13)
 
 best_score = cards.classifyHand(hand_vec)

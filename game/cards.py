@@ -327,5 +327,3 @@ def handRanking(player_vector, pool):
                 best_hand[3] = 0
                 best_hand_counter = 0
     return best_hand
-
-    return "winning hand is"

@@ -17,9 +17,9 @@ cards_dealt = cards.setCardsDealt()
 #Test hand ranking
 player_vec = {}
 player_money = 5000
-Player1 = player.Player(player_money, "Player1", 0)
+Player1 = player.Player(player_money, "Player1", 1)
 player_vec[0] = Player1
-Player2 = player.Player(player_money, "Player2", 0)
+Player2 = player.Player(player_money, "Player2", 1)
 player_vec[1] = Player2
 
 #declare hands

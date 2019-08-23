@@ -14,37 +14,33 @@ cards_dealt = cards.setCardsDealt()
 #print("Welcome to Jojo's Poker Corner!!") something flashy
 #Enter how many players
 
+#Test hand ranking
+player_vec = {}
+player_money = 5000
+Player1 = player.Player(player_money, "Player1", 0)
+player_vec[0] = Player1
+Player2 = player.Player(player_money, "Player2", 0)
+player_vec[1] = Player2
 
-#Hand classify testing
-hand_vec1 = {}
-hand_vec2 = {}
-# hand_vec[0] = cards.draw(deck, cards_dealt)
-# hand_vec[1] = cards.draw(deck, cards_dealt)
-# hand_vec[2] = cards.draw(deck, cards_dealt)
-# hand_vec[3] = cards.draw(deck, cards_dealt)
-# hand_vec[4] = cards.draw(deck, cards_dealt)
-# hand_vec[5] = cards.draw(deck, cards_dealt)
-# hand_vec[6] = cards.draw(deck, cards_dealt)
-hand_vec1[0] = cards.card("7 of Diamonds", 7)
-hand_vec1[1] = cards.card("Jack of Diamonds", 11)
-hand_vec1[2] = cards.card("9 of Diamonds", 9)
-hand_vec1[3] = cards.card("Ace of Clubs", 14)
-hand_vec1[4] = cards.card("10 of Hearts", 10)
-hand_vec1[5] = cards.card("Queen of Spades", 12)
-hand_vec1[6] = cards.card("King of Diamonds", 13)
+#declare hands
+card1 = cards.card("Ace of Spades", 14)
+card2 = cards.card("King of Diamonds", 13)
+card3 = cards.card("3 of Hearts", 3)
+card4 = cards.card("Queen of Clubs", 12)
 
-hand_vec2[0] = cards.card("7 of Diamonds", 7)
-hand_vec2[1] = cards.card("Jack of Diamonds", 11)
-hand_vec2[2] = cards.card("9 of Diamonds", 9)
-hand_vec2[3] = cards.card("Ace of Spades", 14)
-hand_vec2[4] = cards.card("10 of Spades", 10)
-hand_vec2[5] = cards.card("Queen of Spades", 12)
-hand_vec2[6] = cards.card("King of Diamonds", 13)
+#declare pool
+pool_test = {}
+pool_test[0] = cards.card("King of Hearts", 13)
+pool_test[1] = cards.card("7 of Clubs", 7)
+pool_test[2] = cards.card("4 of Diamonds", 4)
+pool_test[3] = cards.card("King of Spades", 13)
+pool_test[4] = cards.card("9 of Hearts", 9)
 
-best_score = cards.classifyHand(hand_vec)
+Player1.setHand(card1, card3)
+Player2.setHand(card2, card4)
 
-
-print("best_score = " + best_score)
+best_score = cards.handRanking(player_vec, pool_test)
+print(best_score)
 
 #UNFINISHED
 #Actual game play

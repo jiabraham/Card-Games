@@ -241,11 +241,11 @@ def multiple(hand_vec):
                 full_house = True
                 continue
             if (triplets):
-                best_score = "3" + convertToMultiple(i)
+                best_score = "4" + convertToMultiple(i)
                 triplets = True
                 continue
             else:
-                best_score = "3" + convertToMultiple(i)
+                best_score = "4" + convertToMultiple(i)
                 triplets = True
                 continue
         if (histogram[i] == 4):
@@ -285,7 +285,7 @@ def classifyHand(hand_vec):
 #UNFINISHED
 #Function to rank who has the best hand at the end of a round
 #Make scalable later, for now 4 players
-def handRanking(player_vector, pool):
+def handRanking(player_vector, pool, winner):
 
     player_vector_index = 0
     hand_rankings = {}
@@ -305,7 +305,6 @@ def handRanking(player_vector, pool):
 
         player_vector_index += 1
 
-    print("hand_rankings[0] = " + hand_rankings[0])
     best_hand[0] = hand_rankings[0]
     best_hand[1] = "0"
     best_hand[2] = "0"
@@ -321,6 +320,7 @@ def handRanking(player_vector, pool):
                 best_hand_counter += 1
                 best_hand[best_hand_counter] = hand_rankings[i]
             if (int(best_hand[0][0:1]) < int(hand_rankings[i][0:1])):
+                winner = i
                 best_hand[0] = hand_rankings[i]
                 best_hand[1] = 0
                 best_hand[2] = 0

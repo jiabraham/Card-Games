@@ -9,8 +9,8 @@ def move(Player, previous):
     print("\n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n" + Player.getName() + "'s turn!")
     player_hand = Player.getHand()
     user_input = input("Are you ready "+ Player.getName() + "?")
-    print("First card is " + player_hand[0])
-    print("Second card is " + player_hand[1])
+    print("First card is " + player_hand[0].getName())
+    print("Second card is " + player_hand[1].getName())
     user_input = input("Would you like to check, bet, or fold? ")
     if (user_input == "quit"):
         print("Thankyou for playing, goodbye!")

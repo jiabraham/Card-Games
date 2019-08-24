@@ -1,0 +1,107 @@
+Joseph Abraham (began 7/26/19)
+
+Plan:
+  Global objects/data structures
+  -Create a dictionary(const) of size 52 to hold the deck of cards
+    *0-12 will be spades
+    *13-25 will be hearts
+    *26-38 will be clubs
+    *49-51 will be diamonds
+  -Create player objects
+    *Hand(vector of 2 strings)
+    *Money
+
+  Gameplay
+  -Starting the Game
+    *"Welcome to Poker by Jojo" (something flashy with big font)
+    *How many players?(eventually add CPU opponent)
+    *How much money will everyone be starting with?
+  -Functions to deal cards
+    *Deal_hands(two cards per player, four players max)
+      >Keep counter of how many players still in round
+      >Random number generator(RNG) to give each players cards
+      >Add each card dealt to cards_dealt vector(size 16)
+      >Add each card to a 2 by 4 matrix to keep track of each players hand
+      >Call RNG again if number yields a card has already been used
+      >Finish when all players have 2 cards each
+      >Call move(for every player)
+    *Deal_pool (needs to take cards_dealt vector from Deal_hands)
+      >RNG to burn a card(check cards_dealt)
+      >Add card to cards_dealt vector
+      >Then RNG*3 to give the flop(check cards_dealt)
+      >Add cards to cards_dealt vector
+      >Call move(for every player not folded)
+      >RNG to burn a card(check cards_dealt)
+      >Add card to cards_dealt vector
+      >RNG give turn card(check cards_dealt)
+      >Add card to cards_dealt vector
+      >Call move(for every player not folded)
+      >RNG to burn a card(check cards_dealt)
+      >Add card to cards_dealt vector
+      >RNG give river card(check cards_dealt)
+      >Add card to cards_dealt vector
+      >Call move(for every player not folded)
+      >Call End_round
+    -Hand Classification
+      *handRanking
+        >Needs a function to find high card for hands that have equal classification
+        >Need to decode classification, maybe use dictionary to map keys to strings
+      *Hand_classification
+        >Check for flush(if flush, check if straight or royal flush)
+        >Check for straight(highest straight if applicable)
+        >Check for pair(if pair, if pair check 2 pair, if 2 pair
+        check if 3 of kind, if 3 of kind check full house, or 4 of a kind)
+        >Check for high card
+        >Royal flush = 10
+        >Straight flush = 9
+        >4 of kind = 8
+        >Full house = 7
+        >Flush = 6
+          #607(flush with highest card 7)
+          #...
+        >Straight = 5
+          #505(straight ending in 5)
+          #...
+          #514(straight ending in Ace)
+        >3 of kind = 4
+          #402(triplet comprised of 2's)
+          #403(triplet comprised of 3's)
+          #...
+          #414(for Aces)
+        >2 pairs = 3
+          #30203(for pair of 2's and pair of 3's)
+          #30304(for pair of 3's and pair of 4's)
+          #...
+          #31314(for pair of K's and pair of A's)
+        >1 pair = 2
+          #202(for 2's)
+          #203(for 3's)
+          #...
+          #214(for Aces)
+        >High card = 1
+          #102(for 2, not that this is possible)
+          #103(for 3)
+          #...
+          #114(for Ace)
+  -Functions dealing with money
+    *move (amount_bet)
+      >Takes in string ("bet", "check", or "fold")
+      >if invalid string or move print "invalid move" (adjust specificity later)
+      >Adjusts amounts_bet vector(size 4) with amounts bet by all players
+      >Adjust int pot (sum of values in amounts_bet)
+    *End_round
+      >Round ends when everyone has folded or after betting round of river card
+      >Hand_classification to determine round winner
+      >Increment player money by pot, pot set back to zero
+      >Print round winner, print how much money won
+      >Give options: play another round or end game
+
+  Simple Bot
+    *Scoring matrix, calculates all the possibilities other person has from 22-AA
+    *Calculates probability of each of those
+    *How to factor in amount bet?
+    *Calculate expected bet for someone who has a certain hand based on hand
+    *Bluff factor? (keep track of last 10 hands?)
+  AI Reinforcement Learning Bot
+    *To be made after basic functionality is all completed and I have more
+    experience with neural nets

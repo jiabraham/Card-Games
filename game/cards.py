@@ -291,7 +291,6 @@ def classifyHand(hand_vec):
     best_score = padRanking(best_score)
     return best_score
 
-#UNFINISHED
 #Function to rank who has the best hand at the end of a round
 #Make scalable later, for now 4 players
 def handRanking(player_vector, pool, winner):

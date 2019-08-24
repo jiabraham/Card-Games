@@ -124,9 +124,10 @@ def flush(hand_vec):
         if (hand_vec[k].getName()[-6:] == "Spades"):
             spades_vec[spades_vec_counter] = hand_vec[k]
             spades_vec_counter += 1
-            if (spades_vec_counter > 3):
+            if (spades_vec_counter > 4):
                 straight_flush = straight(spades_vec)
                 if (straight_flush):
+                    print("straight flush found spades = " + straight_flush)
                     best_score = "9" + straight_flush[1:3]
                 else:
                     best_score = "6" + str(hand_vec[k].getClassification())
@@ -135,9 +136,10 @@ def flush(hand_vec):
         if (hand_vec[k].getName()[-6:] == "Hearts"):
             hearts_vec[hearts_vec_counter] = hand_vec[k]
             hearts_vec_counter += 1
-            if (hearts_vec_counter > 3):
+            if (hearts_vec_counter > 4):
                 straight_flush = straight(hearts_vec)
                 if (straight_flush):
+                    print("straight flush found hearts = " + straight_flush)
                     best_score = "9" + straight_flush[1:3]
                 else:
                     best_score = "6" + str(hand_vec[k].getClassification())
@@ -146,9 +148,10 @@ def flush(hand_vec):
         if (hand_vec[k].getName()[-5:] == "Clubs"):
             clubs_vec[clubs_vec_counter] = hand_vec[k]
             clubs_vec_counter += 1
-            if (clubs_vec_counter > 3):
+            if (clubs_vec_counter > 4):
                 straight_flush = straight(clubs_vec)
                 if (straight_flush):
+                    print("straight flush found clubs = " + straight_flush)
                     best_score = "9" + straight_flush[1:3]
                 else:
                     best_score = "6" + str(hand_vec[k].getClassification())
@@ -157,14 +160,13 @@ def flush(hand_vec):
         if (hand_vec[k].getName()[-8:] == "Diamonds"):
             diamonds_vec[diamonds_vec_counter] = hand_vec[k]
             diamonds_vec_counter += 1
-            if (diamonds_vec_counter > 3):
+            if (diamonds_vec_counter > 4):
                 straight_flush = straight(diamonds_vec)
-
-                print("straight_flush = " + straight_flush)
                 if (straight_flush == "0"):
                     best_score = "6" + str(hand_vec[k].getClassification())
                     print("best_score_flush = " + best_score)
                 else:
+                    print("straight flush found diamonds = " + straight_flush)
                     best_score = "9" + straight_flush[1:3]
                     print("best_score_diamonds = " + best_score)
                 flush  = True
@@ -296,7 +298,6 @@ def handRanking(player_vector, pool, winner):
 
     player_vector_index = 0
     hand_rankings = {}
-    best_hand = {}
 
     while (player_vector_index < len(player_vector)):
         #If players have reached the end of the final betting phase
@@ -311,17 +312,18 @@ def handRanking(player_vector, pool, winner):
         player_vector_index += 1
 
     print(hand_rankings)
+    best_hand = {}
+    best_hand_index = 0
     best_hand[0] = hand_rankings[0]
     best_hand[1] = "0"
     best_hand[2] = "0"
     best_hand[3] = "0"
 
     #Double loop to compare each letter of each classification
-    best_hand_counter = 0
-    winner = {}
+    winner_index = 0
     winner[0] = 0
-    for j in range(1, len(hand_rankings)):
-            if (int(best_hand[0]) < int(hand_rankings[i]):
+    for i in range(1, len(hand_rankings)):
+            if (int(best_hand[0]) < int(hand_rankings[i])):
                 print("winner = " + str(winner))
                 print("reached if statement")
 
@@ -334,9 +336,12 @@ def handRanking(player_vector, pool, winner):
                 winner[1] = 0
                 winner[2] = 0
                 winner[3] = 0
-                
-                best_hand_counter = 0
-            if (int(best_hand[0]) == int(hand_ranking[i]):
-                best_hand_counter += 1
-                best_hand[best_hand_counter] = hand_rankings[i]
+
+                best_hand_index = 0
+            if (int(best_hand[0]) == int(hand_rankings[i])):
+                best_hand_index += 1
+                best_hand[best_hand_index] = hand_rankings[i]
+                winner_index += 1
+                winner[winner_index] = i
+
     return best_hand

@@ -15,40 +15,41 @@ cards_dealt = cards.setCardsDealt()
 #Enter how many players
 
 #Test hand ranking
-player_vec = {}
-player_money = 5000
-winner = {}
-Player1 = player.Player(player_money, "Player1", 1)
-player_vec[0] = Player1
-Player2 = player.Player(player_money, "Player2", 1)
-player_vec[1] = Player2
-Player3 = player.Player(player_money, "Player3", 1)
-player_vec[2] = Player3
-
-#declare hands
-card1 = cards.card("Ace of Spades", 14)
-card4 = cards.card("King of Diamonds", 13)
-
-card2 = cards.card("Ace of Diamonds", 14)
-card5 = cards.card("Jack of Hearts", 11)
-
-card3 = cards.card("King of Clubs", 13)
-card6 = cards.card("5 of Clubs", 5)
-
-#declare pool
-pool_test = {}
-pool_test[0] = cards.card("King of Hearts", 13)
-pool_test[1] = cards.card("Ace of Clubs", 14)
-pool_test[2] = cards.card("4 of Diamonds", 4)
-pool_test[3] = cards.card("Queen of Hearts", 12)
-pool_test[4] = cards.card("9 of Hearts", 9)
-
-Player1.setHand(card1, card4)
-Player2.setHand(card2, card5)
-Player3.setHand(card3, card6)
-
-best_score = cards.handRanking(player_vec, pool_test, winner)
-
+# player_vec = {}
+# player_money = 5000
+# winner = {}
+# Player1 = player.Player(player_money, "Player1", 1)
+# player_vec[0] = Player1
+# Player2 = player.Player(player_money, "Player2", 1)
+# player_vec[1] = Player2
+# Player3 = player.Player(player_money, "Player3", 1)
+# player_vec[2] = Player3
+#
+# #declare hands
+# card1 = cards.card("Ace of Spades", 14)
+# card4 = cards.card("King of Diamonds", 13)
+#
+# card2 = cards.card("Ace of Diamonds", 14)
+# card5 = cards.card("Jack of Hearts", 11)
+#
+# card3 = cards.card("King of Clubs", 13)
+# card6 = cards.card("5 of Clubs", 5)
+#
+# #declare pool
+# pool_test = {}
+# pool_test[0] = cards.card("King of Hearts", 13)
+# pool_test[1] = cards.card("Ace of Clubs", 14)
+# pool_test[2] = cards.card("4 of Diamonds", 4)
+# pool_test[3] = cards.card("Queen of Hearts", 12)
+# pool_test[4] = cards.card("9 of Hearts", 9)
+#
+# Player1.setHand(card1, card4)
+# Player2.setHand(card2, card5)
+# Player3.setHand(card3, card6)
+#
+# best_score = cards.handRanking(player_vec, pool_test, winner)
+# print(winner)
+# print(best_score)
 
 
 #UNFINISHED

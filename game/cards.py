@@ -100,6 +100,12 @@ def convertToMultiple(num):
         num = str(num)
     return num
 
+def padRanking(ranking):
+    if (len(ranking) != 5):
+        for i in range (0, 5-len(ranking)):
+            ranking += "0"
+    return ranking
+
 def flush(hand_vec):
     best_score = "0";
 
@@ -280,6 +286,7 @@ def classifyHand(hand_vec):
     if (best_score_flush == "914"):
         best_score = "10"
 
+    best_score = padRanking(best_score)
     return best_score
 
 #UNFINISHED
@@ -301,10 +308,9 @@ def handRanking(player_vector, pool, winner):
             hand_vec[5] = pool[3]
             hand_vec[6] = pool[4]
             hand_rankings[player_vector_index] = classifyHand(hand_vec)
-
-
         player_vector_index += 1
 
+    print(hand_rankings)
     best_hand[0] = hand_rankings[0]
     best_hand[1] = "0"
     best_hand[2] = "0"
@@ -312,18 +318,25 @@ def handRanking(player_vector, pool, winner):
 
     #Double loop to compare each letter of each classification
     best_hand_counter = 0
-    for j in range(0, 3):
-        for i in range(1, len(hand_rankings)):
-            if (int(best_hand[0][0:1]) > int(hand_rankings[i][0:1])):
-                continue
-            if (int(best_hand[0][0:1]) == int(hand_rankings[i][0:1])):
-                best_hand_counter += 1
-                best_hand[best_hand_counter] = hand_rankings[i]
-            if (int(best_hand[0][0:1]) < int(hand_rankings[i][0:1])):
-                winner = i
+    winner = {}
+    winner[0] = 0
+    for j in range(1, len(hand_rankings)):
+            if (int(best_hand[0]) < int(hand_rankings[i]):
+                print("winner = " + str(winner))
+                print("reached if statement")
+
                 best_hand[0] = hand_rankings[i]
                 best_hand[1] = 0
                 best_hand[2] = 0
                 best_hand[3] = 0
+
+                winner[0] = i
+                winner[1] = 0
+                winner[2] = 0
+                winner[3] = 0
+                
                 best_hand_counter = 0
+            if (int(best_hand[0]) == int(hand_ranking[i]):
+                best_hand_counter += 1
+                best_hand[best_hand_counter] = hand_rankings[i]
     return best_hand

@@ -1,3 +1,1 @@
-#Texas holdem
-
 This is an implementation of Texas-Holdem the poker game written in python with several steps. First is to create the game so that 2-6 users can play. A reinforcment learning bot will be built using a model to statistically best any user or the simple bot over a suffiently large number of hands played. A proper frontend display may be added later, for now there is a simple display using the terminal.

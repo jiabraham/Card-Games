@@ -7,10 +7,14 @@ Should I declare functions for flush, straight, pair?
   -Declare functions for flush, straight, and multiple
   -Every hand in the game can somehow be broken down into those 3 categories
 
+Is encoding into different classifications better than making a data structure for each different type of hand?
+  -encoding is more efficient, but data structures may have been more convenient representations
 How to check for straight flush?
   -Every time I find a flush, call the straight function to see if the flush is also a straight
   -Previous trouble was in a hand there can be a straight and a flush which does not result in a straight flush
   -Ex: 2H, 9H, 10S, JH, QH, KH, AC
+  
+ 
 
 How to make a loop to declare number of players? (is this necessary)
   -Not necessary for now because this doesn't need to be completely scalable

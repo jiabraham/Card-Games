@@ -1,2 +1,2 @@
 # Card Games
-This is repo has an implementations of Texas-Holdem and blackjack written in python with reinforcement learning bots to play against(in progress).
+This is repo has the card games Texas-Holdem and Blackjack written in python with reinforcement learning bots to play against(in progress).

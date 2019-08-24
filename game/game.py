@@ -48,8 +48,7 @@ Player2.setHand(card2, card5)
 Player3.setHand(card3, card6)
 
 best_score = cards.handRanking(player_vec, pool_test, winner)
-print(winner)
-print(best_score)
+
 
 
 #UNFINISHED

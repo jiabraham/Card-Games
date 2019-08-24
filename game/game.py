@@ -174,53 +174,5 @@ def main():
                 actions.endRound(player_vector, False)
                 continue
 
-
-
-
-
-
-
-            print("\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n Player2's turn")
-            user_input = input("Are you ready Player2?")
-            if (move == 1):
-                print("Player1 bet $" + str(amount_bet))
-                print("First card is " + player2_hand[0])
-                print("Second card is " + player2_hand[1])
-                user_input = input("Would you like to call, raise, or fold? ")
-                if (user_input == "quit"):
-                    print("Thankyou for playing, goodbye!")
-                    exit(0)
-                if (user_input == "call"):
-                    amount_bet = actions.bet(Player2, amount_bet)
-                    pot = pot + amount_bet
-                    print("Player2 has $" + str(Player2.getMoney()) + " left")
-                    print("Pot is now $" + str(pot))
-                if (user_input == "raise"):
-                    user_input = input("How much would you like to wager? ")
-                    actions.reraise(Player2, int(user_input), amount_bet)
-                if (user_input == "fold"):
-                    "Player1 wins the round"
-                    #Call end function
-                    #endRound(Player2)
-                    continue
-            else:
-                print("Player1 checked")
-                print("First card is " + player2_hand[0])
-                print("Second card is " + player2_hand[1])
-
-                user_input = input("Would you like to check, bet, or fold? ")
-                if (user_input == "quit"):
-                    print("Thankyou for playing, goodbye!")
-                    exit(0)
-                if (user_input == "bet"):
-                    amount_bet = input("How much would you like to wager? ")
-                    amount_bet = actions.bet(Player1, int(amount_bet))
-                    pot = int(amount_bet)
-                    print("Player1 has $" + str(Player1.getMoney()) + " left")
-                    print("Pot is now $" + str(pot))
-                if (user_input == "fold"):
-                    "Player1 wins the round"
-                    continue
-            game_counter = game_counter + 1
         #if (game_counter == 1):
-#main()
+main()

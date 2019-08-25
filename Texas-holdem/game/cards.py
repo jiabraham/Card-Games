@@ -5,20 +5,49 @@ import random
 
 
 class card:
+    """Summary of class here.
+
+    Longer class information....
+    Longer class information....
+
+    Attributes:
+        likes_spam: A boolean indicating if we like SPAM or not.
+        eggs: An integer count of the eggs we have laid.
+    """
+
     def __init__(self, name, classification):
+        """Inits SampleClass with blah."""
         self.name = name
         self.classification = classification
+
     def getName(self):
+        """Performs operation blah."""
         return self.name
+
     def setName(self, name):
+        """Performs operation blah."""
         self.name = self.name + name
+
     def getClassification(self):
+        """Performs operation blah."""
         return self.classification
+
     def setClassification(self, classification):
+        """Performs operation blah."""
         self.classification = self.classification
 
 #Function to create and set dictionary to hold cards
 def setDeck():
+    """This function sets the deck of cards within a constant read only vector.
+
+    Returns:
+        A dict mapping numbers 0-51 to the cards in a deck. Each row is
+        represented as a tuple of strings. For example:
+
+        {'0': ("Ace of Spades", 14)
+         '10': ('10 of Spades', 10),
+         '51': ('King of Diamonds', 51)}
+    """
     deck = {}
     for i in range (0, 52):
         #Set card values
@@ -46,6 +75,14 @@ def setDeck():
 
 #Function to create and set cards_dealt vector
 def setCardsDealt():
+    """This function initializes the cards_dealt vector with all 0's.
+
+    Returns:
+        A dict mapping numbers 0-51 to a 0 or a 1. If the number maps to a 0,
+        the card corresponding to that input is not in use. If the number
+        maps to a 1, the card is in use and cannot be drawn again from
+        the deck vector.
+    """
     cards_dealt = {}
     for i in range (0, 52):
         cards_dealt[i] = 0
@@ -53,6 +90,19 @@ def setCardsDealt():
 
 #Function to draw a random card
 def draw(deck, cards_dealt):
+    """Fetches a card from the deck that has not already been drawn. This
+        function adjusts the cards_dealt vector after finding a new card.
+
+    Args:
+        deck: a vector of the total possible 52 cards.
+        cards_dealt: A vector of 1's and 0's indicating which cards have
+            been already drawn.
+
+    Returns:
+        A new card from the deck to be used in the game, for example:
+
+        Ace of Spades, 10 of Diamonds, 5 of Hearts
+    """
     deck_index = random.randint(0,51)
     #check if random index is the same as one that's already in use
     if (cards_dealt[deck_index] == 0):
@@ -85,6 +135,14 @@ def dealRiver(deck, cards_deal, pool, burn):
 #DONE
 def sortHand(hand_vec):
     #Simple sort for only 7 elements
+    """This function sorts a hand based on classifications using simple sort.
+
+    Args:
+        hand_vec: a vector of 7 cards that represents the hand of a player.
+
+    Returns:
+        The same vector sorted by classification.
+    """
     for i in range(0,7):
         for j in range(0,7):
             if (hand_vec[j].classification > hand_vec[i].classification):
@@ -94,6 +152,17 @@ def sortHand(hand_vec):
     return hand_vec
 
 def convertToMultiple(num):
+    """This function converts a classification to a two digit number. 2 becomes
+        02, 9 becomes 09, 12 stays as 12, if number is already two digits then
+        it is left as is.
+
+    Args:
+        num: a classification of one of the cards in hand being ranked.
+
+    Returns:
+        The same number with padding if necessary
+
+    """
     if (len(str(num)) != 2):
         num = "0" + str(num)
     else:
@@ -101,12 +170,38 @@ def convertToMultiple(num):
     return num
 
 def padRanking(ranking):
+    """This function converts a classification to a 5 digit number. 212 becomes
+        21200, if number is already 5 digits then it stays as it is. This
+        allows for greater than or less than comparison between rankings
+        instead of comparing 1 or 2 digits at time.
+
+    Args:
+        ranking: an encoding of a ranking based on how good a hand is. The
+            the higher the ranking, the better the hand is.
+
+    Returns:
+        A 5 digit ranking which can be directly compared to other rankings.
+    """
     if (len(ranking) != 5):
         for i in range (0, 5-len(ranking)):
             ranking += "0"
     return ranking
 
 def flush(hand_vec):
+    """This function detects a flush within a hand vector of 7 cards. There are
+        4 suits, each has a counter while looping through all 7 cards. After
+        the 5th card, if there is 5 of a single suit, there exists flush.
+        Additionally, after a flush is found, the vector needs to be
+        checked for a straight to find out if there is a straight
+        flush.
+
+    Args:
+        hand_vec: a vector of 7 cards that represents the hand of a player.
+
+    Returns:
+        A ranking indicating whether there is a flush, straight flush,
+        or neither.
+    """
     best_score = "0";
 
     spades_vec = {}
@@ -173,7 +268,16 @@ def flush(hand_vec):
     return best_score
 
 def straight(hand_vec):
+    """This function detects a straight within a hand vector of 7 cards. A
+        counter is kept and incremented if the next highest card is one
+        greater than the previous card.
 
+    Args:
+        hand_vec: a vector of 7 cards that represents the hand of a player.
+
+    Returns:
+        A ranking indicating whether there is a straight or not.
+    """
     #Declare counter and best_score
     straight_counter = 1
     best_score = "0"
@@ -193,7 +297,19 @@ def straight(hand_vec):
     return best_score
 
 def multiple(hand_vec):
+    """This function detects a pair, two pair, three of kind, full house, four
+        of a kind within a hand vector of 7 cards. A histogram is calculated
+        to determine how many of each classification exists within the hand.
+        From this, all rankings involving cards with the same
+        classification can be found.
 
+    Args:
+        hand_vec: a vector of 7 cards that represents the hand of a player.
+
+    Returns:
+        A ranking indicating whether there is any of the above types of
+        hands.
+    """
     #Declare best score variable
     #May want to make this an object to keep a string representation
     best_score = "0"
@@ -266,25 +382,30 @@ def multiple(hand_vec):
 #Function to return a hand ranking 1-10
 #May have to edit later to include high card to differentiate same ranking
 def classifyHand(hand_vec):
+    """This function uses the previous 3 functions to classify the complete
+        ranking of any given hand.
+
+    Args:
+        hand_vec: a vector of 7 cards that represents the hand of a player.
+
+    Returns:
+        The highest value among the 3 possible rankings of multiple, straight,
+        and flush.
+    """
     best_score = 0
     hand_vec = sortHand(hand_vec)
 
-    #Need to return actual vectors to check for straight flush
     best_score_multiple = multiple(hand_vec)
     best_score_straight = straight(hand_vec)
     best_score_flush = flush(hand_vec)
 
-    print("best_multiple = " + best_score_multiple)
-    print("best_score_straight = " + best_score_straight)
-    print("best_score_flush = " + best_score_flush)
-
-    #Need to put checks in place for royal flush
     if (int(best_score_multiple[0:1]) > int(best_score_straight[0:1])):
         best_score = best_score_multiple
     else:
         best_score = best_score_straight
     if (int(best_score[0:1]) < int(best_score_flush[0:1])):
         best_score = best_score_flush
+    #Special binding for a royal flush
     if (best_score_flush == "914"):
         best_score = "10"
 
@@ -295,7 +416,17 @@ def classifyHand(hand_vec):
 #Function to rank who has the best hand at the end of a round
 #Make scalable later, for now 4 players
 def handRanking(player_vector, pool, winner):
+    """This function returns the best ranking of all hands being ranked at the
+        end of round.
 
+    Args:
+        player_vector: a vector of all of the players in the round.
+        pool: the cards that are common to everyone playing.
+        winner: the index of the player that has the winning hand.
+
+    Returns:
+        The best hand among all players still in the round.
+    """
     player_vector_index = 0
     hand_rankings = {}
 

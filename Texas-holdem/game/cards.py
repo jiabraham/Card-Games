@@ -5,35 +5,35 @@ import random
 
 
 class card:
-    """Summary of class here.
-
-    Longer class information....
-    Longer class information....
+    """The card class is used to represent every card in a standard 52
+        card deck.
 
     Attributes:
-        likes_spam: A boolean indicating if we like SPAM or not.
-        eggs: An integer count of the eggs we have laid.
+        name: A string representation of what the card is containing number
+        (or jack, queen, king, ace) and suit.
+        classification: An integer to determine where the card stands in rank
+            in comparison to other cards.
     """
 
     def __init__(self, name, classification):
-        """Inits SampleClass with blah."""
+        """Initialized card class with a string name and int classification."""
         self.name = name
         self.classification = classification
 
     def getName(self):
-        """Performs operation blah."""
+        """Returns the name of the card to determine suit."""
         return self.name
 
     def setName(self, name):
-        """Performs operation blah."""
+        """Sets the name of the card when initializing the whole deck."""
         self.name = self.name + name
 
     def getClassification(self):
-        """Performs operation blah."""
+        """Returns the classification of a card."""
         return self.classification
 
     def setClassification(self, classification):
-        """Performs operation blah."""
+        """Sets the intitial classification of a card."""
         self.classification = self.classification
 
 #Function to create and set dictionary to hold cards

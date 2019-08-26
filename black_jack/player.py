@@ -7,7 +7,7 @@ class Player:
         self.money = money
         self.hand = {}
         self.name = name
-        self.status = status
+        self.total = 0
 
     #Function that allows the money of a player to be retrieved
     def getName(self):
@@ -22,9 +22,9 @@ class Player:
         if (adjustment == 0):
             self.money = amount
         if (adjustment == 1):
-            self.money = self.getMoney() + amount
+            self.money = self.getMoney() + int(amount)
         if (adjustment == -1):
-            self.money = self.getMoney() - amount
+            self.money = self.getMoney() - int(amount)
 
     #Function that allows the hand of a player to be retrieved
     def getHand(self):
@@ -35,11 +35,14 @@ class Player:
         self.hand[0] = card1
         self.hand[1] = card2
 
-    #Function to get status
-    def getStatus(self):
-        return self.status
+    #Function to get total
+    def getTotal(self):
+        return self.total
 
-    #Function to set status
-    def setStatus(self, status):
-        self.status = status
+    #Function to set total
+    def setTotal(self, total):
+        self.total = total
 
+    #Function to adjust total
+    def adjustTotal(self, total):
+        self.total += total 

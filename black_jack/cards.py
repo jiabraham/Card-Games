@@ -60,8 +60,7 @@ def draw(deck, cards_dealt):
         return deck[deck_index]
     return draw(deck, cards_dealt)
 
-def deal(player_number):
-    of
-
-def hit():
-
+#Reset hands
+def resetHands(Player):
+    for i in range(2, len(Player.hand)):
+        del(Player.hand[i])

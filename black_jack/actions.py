@@ -26,18 +26,17 @@ def move(Player, previous):
         return amount
     if (user_input == "fold"):
         return -1
-    if (user_input == "check"):
-        return 0
+
 
 def bet(Player, amount_bet):
-    Player1.setMoney(amount_bet, -1)
+    Player.setMoney(amount_bet, -1)
 
     return amount_bet
 
 #This function defines the bet move
-def hit(Player, amount):
-    cards.draw
-    return amount
+def hit(Player, hand_index):
+    Player.hand[hand_index] = cards.draw()
+
 
 #UNFINISHED
 #This function defines reraise(may not be used)
@@ -51,12 +50,10 @@ def stay(Player, amount, amount_bet):
 
 #Needs testing
 #This function defines the end of the round in which someone has won
-def endRound(pool, player_vector, more_than_one_player, pot):
-    if (more_than_one_player):
-        winning_hand = cards.handRanking(player_vector, pool)
+def endRound(Player, amount_bet, busted):
+    if (busted):
+        
+        print(Player.getName() + " lost $" + str(amount_bet))
     else:
-        player_vector_index = 0
-        while (True):
-            if (player_vector[player_vector_index].getStatus == 1):
-                print(player_vector[player_vector_index].getName() + " wins $" + str(pot) + "!")
-                break
+        Player.setMoney(amount_bet, 1)
+        print(Player.getName() + " won $" + str(amount_bet))

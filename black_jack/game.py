@@ -13,6 +13,7 @@ cards_dealt = cards.setCardsDealt()
 #Welcome messages
 
 def main():
+    print("\n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n")
     print("Welcome to Jojo's Blackjack Corner!!")
     print("")
 
@@ -93,42 +94,117 @@ def main():
     user_input = ""
 
     while (True):
+        print("\n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n")
+
         user_input = input("Ready to play?")
 
         if (user_input == "quit"):
             print("Thank you for playing!")
+            exit(0)
 
-        print("You have $" + str(Player1.getMoney()))
+        print("You have $" + str(Player2.getMoney()))
 
-        card1 = draw(deck, cards_dealt)
-        card2 = draw(deck, cards_dealt)
-        card3 = draw(deck, cards_dealt)
-        card4 = draw(deck, cards_dealt)
+        card1 = cards.draw(deck, cards_dealt)
+        card2 = cards.draw(deck, cards_dealt)
+        card3 = cards.draw(deck, cards_dealt)
+        card4 = cards.draw(deck, cards_dealt)
 
+        cards.resetHands(Player1)
+        cards.resetHands(Player2)
         Player1.setHand(card2, card4)
         Player2.setHand(card1, card3)
 
-        user_input = int(input("How much are you betting (100, 500, or 1000)?"))
+        Player1.setTotal(card2.getClassification()+card4.getClassification())
+        Player2.setTotal(card1.getClassification()+card3.getClassification())
 
-        while (user_input > Player1.getMoney()):
-            user_input = int(input("Please enter a valid bet:"))
 
-        pot = 2*actions.bet(user_input)
+        amount_bet = int(input("How much are you betting (100, 500, or 1000)?"))
 
-        player_hand = Player1.getHand()
-        print("Hidden: First card is " + player_hand[0].getName())
-        print("Visible: Second card is " + player_hand[1].getName())
-        user_input = input("Would you like to hit or stay? ")
-        if (user_input == "quit"):
-            print("Thankyou for playing, goodbye!")
-            exit(0)
-        if (user_input == "hit"):
-            hit(Player2)
-        if (user_input == "stay"):
-            print("Your total is " + total)
-        dealer(Player1)
-        
-        print("\n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n" + Player.getName() + "'s turn!")
+        while (amount_bet > Player2.getMoney()):
+            amount_bet = int(input("Please enter a valid bet:"))
+
+        game_total = 21
+        busted = False
+        while (True):
+            hand_index = 2
+            for i in range(0, len(Player2.hand)):
+                if (i == 0):
+                    print("Hidden: " + Player2.hand[i].getName())
+                    print(Player2.hand[i].getClassification())
+                else:
+                    print("Visible: " + Player2.hand[i].getName())
+                    print(Player2.hand[i].getClassification())
+            print("Your total is now: " + str(Player2.getTotal()))
+            user_input = input("Would you like to hit or stay? ")
+            if (user_input == "quit"):
+                print("Thankyou for playing, goodbye!")
+                exit(0)
+            if (user_input == "hit"):
+                Player2.hand[hand_index] = cards.draw(deck, cards_dealt)
+                Player2.adjustTotal(Player2.hand[hand_index].getClassification())
+                print("Your total is now: " + str(Player2.getTotal()))
+                hand_index += 1
+                if (Player2.getTotal() > game_total):
+                    print("Oops, busted")
+                    for i in range(0, len(Player2.hand)):
+                        if (i == 0):
+                            print("Hidden: " + Player2.hand[i].getName())
+                            print(Player2.hand[i].getClassification())
+                        else:
+                            print("Visible: " + Player2.hand[i].getName())
+                            print(Player2.hand[i].getClassification())
+                    busted = True
+                    actions.endRound(Player2, amount_bet, busted)
+                    break
+            if (user_input == "stay"):
+                print("Your total is " + str(Player2.getTotal()))
+                break
+        if (busted):
+            continue
+
+        while(True):
+            print("\nDealer's cards")
+            dealer_total = 0
+            hand_index = 2
+            for i in range(0, len(Player1.hand)):
+                dealer_total += Player1.hand[i].getClassification()
+            for i in range(0, len(Player1.hand)):
+                if (i == 0):
+                    print("Hidden: " + Player1.hand[i].getName())
+                else:
+                    print("Visible: " + Player1.hand[i].getName())
+            if (dealer_total == Player2.getTotal()):
+                print("PUSH!!!")
+                Player2.setMoney(amount_bet, 1)
+                break
+            if (dealer_total < 17):
+                Player1.hand[hand_index] = cards.draw(deck, cards_dealt)
+                Player1.adjustTotal(Player1.hand[hand_index].getClassification())
+                hand_index += 1
+                for i in range(0, len(Player1.hand)):
+                    if (i == 0):
+                        print("Hidden: " + Player1.hand[i].getName())
+                    else:
+                        print("Visible: " + Player1.hand[i].getName())
+                print("Dealer total is now: " + str(Player1.getTotal()))
+                continue
+            if (dealer_total > 16 and dealer_total < 22):
+                print("Dealer total is now: " + str(Player1.getTotal()))
+                if (Player2.getTotal() > Player1.getTotal()):
+                    print("You win $" + str(amount_bet) + "!")
+                    amount_bet = 2*amount_bet
+                    Player2.setMoney(amount_bet, 1)
+                    break
+                else:
+                    busted = True
+                    actions.endRound(Player1, amount_bet, busted)
+                break
+            if (dealer_total > game_total):
+                print("You win $" + str(amount_bet) + "!")
+                amount_bet = 2*amount_bet
+                Player2.setMoney(amount_bet, 1)
+                break
+        continue
+        print(" \n \n \n \n \n \n \n \n \n \n \n" + Player.getName() + "'s turn!")
 
 main()
-

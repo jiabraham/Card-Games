@@ -64,3 +64,45 @@ def draw(deck, cards_dealt):
 def resetHands(Player):
     for i in range(2, len(Player.hand)):
         del(Player.hand[i])
+
+def sortHand(hand_vec):
+    #Simple sort for only 7 elements
+    """This function sorts a hand based on classifications using simple sort.
+    Args:
+        hand_vec: a vector of 7 cards that represents the hand of a player.
+    Returns:
+        The same vector sorted by classification.
+    """
+    for i in range(0,7):
+        for j in range(0,7):
+            if (hand_vec[j].classification > hand_vec[i].classification):
+                temp = hand_vec[i]
+                hand_vec[i] = hand_vec[j]
+                hand_vec[j] = temp
+    return hand_vec
+
+def aceHighOrLow(Player):
+    print("Reached aceHighOrLow")
+    ace_counter = 0
+    optimal_total_with_11 = 0
+    optimal_total_no_11 = 0
+    for i in range(0, len(Player.hand)):
+        if (Player.hand[i].getClassification() == 11 and ace_counter > 0):
+            optimal_total_with_11 += 1
+        elif (Player.hand[i].getClassification() == 11 and ace_counter == 0):
+            optimal_total_with_11 += 11
+            ace_counter = 1
+            continue
+        else:
+            optimal_total_with_11 += Player.hand[i].getClassification()
+    for i in range(0, len(Player.hand)):
+        if (Player.hand[i].getClassification() == 11 and ace_counter > 0):
+            optimal_total_no_11 += 1
+        else:
+            optimal_total_no_11 += Player.hand[i].getClassification()
+            if (optimal_total_with_11 > 21):
+                print("optimal_total_no_11 = " + optimal_total_no_11)
+                Player2.setTotal(optimal_total_no_11)
+            else:
+                print("optimal_total_no_11 = " + optimal_total_no_11)
+                Player2.setTotal(optimal_total_with_11)

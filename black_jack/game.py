@@ -122,7 +122,7 @@ def main():
 
         while (amount_bet > Player2.getMoney()):
             amount_bet = int(input("Please enter a valid bet:"))
-
+        actions.bet(Player2, amount_bet)
         game_total = 21
         busted = False
         while (True):
@@ -134,7 +134,14 @@ def main():
                 else:
                     print("Visible: " + Player2.hand[i].getName())
                     print(Player2.hand[i].getClassification())
-            print("Your total is now: " + str(Player2.getTotal()))
+            if (len(Player2.hand) == 2 and Player2.getTotal() == 21):
+                print("Blackjack, congradulations!")
+                break;
+            elif (Player2.getTotal() == 21):
+                print("You got 21, congradulations!")
+                break
+            else :
+                print("Your total is now: " + str(Player2.getTotal()))
             user_input = input("Would you like to hit or stay? ")
             if (user_input == "quit"):
                 print("Thankyou for playing, goodbye!")
@@ -199,7 +206,7 @@ def main():
                     busted = True
                     actions.endRound(Player1, amount_bet, busted)
                 break
-            if (dealer_total > game_total):
+            if (dealer_total > 21):
                 print("You win $" + str(amount_bet) + "!")
                 amount_bet = 2*amount_bet
                 Player2.setMoney(amount_bet, 1)

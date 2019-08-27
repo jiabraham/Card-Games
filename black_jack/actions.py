@@ -31,7 +31,6 @@ def move(Player, previous):
 def bet(Player, amount_bet):
     Player.setMoney(amount_bet, -1)
 
-    return amount_bet
 
 #This function defines the bet move
 def hit(Player, hand_index):
@@ -50,10 +49,9 @@ def stay(Player, amount, amount_bet):
 
 #Needs testing
 #This function defines the end of the round in which someone has won
-def endRound(Player, amount_bet, busted):
-    if (busted):
-        
-        print(Player.getName() + " lost $" + str(amount_bet))
-    else:
+def endRound(Player, amount_bet, busted, dealer):
+    if (busted and dealer):
         Player.setMoney(amount_bet, 1)
         print(Player.getName() + " won $" + str(amount_bet))
+    else:
+        print("You lost $" + str(amount_bet))

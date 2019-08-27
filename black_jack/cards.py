@@ -82,7 +82,6 @@ def sortHand(hand_vec):
     return hand_vec
 
 def aceHighOrLow(Player):
-    print("Reached aceHighOrLow")
     ace_counter = 0
     optimal_total_with_11 = 0
     optimal_total_no_11 = 0
@@ -100,9 +99,7 @@ def aceHighOrLow(Player):
             optimal_total_no_11 += 1
         else:
             optimal_total_no_11 += Player.hand[i].getClassification()
-            if (optimal_total_with_11 > 21):
-                print("optimal_total_no_11 = " + optimal_total_no_11)
-                Player2.setTotal(optimal_total_no_11)
-            else:
-                print("optimal_total_no_11 = " + optimal_total_no_11)
-                Player2.setTotal(optimal_total_with_11)
+    if (optimal_total_with_11 > 21):
+        Player.setTotal(optimal_total_no_11)
+    else:
+        Player.setTotal(optimal_total_with_11)

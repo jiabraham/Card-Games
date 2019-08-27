@@ -98,7 +98,7 @@ def main():
 
         user_input = input("Ready to play?")
 
-        if (user_input == "quit"):
+        if (user_input == "quit" or user_input == "q"):
             print("Thank you for playing!")
             exit(0)
 
@@ -126,8 +126,8 @@ def main():
 
         aces = 0
         busted = False
+        hand_index = 2
         while (True):
-            hand_index = 2
             for i in range(0, len(Player2.hand)):
                 if (i == 0):
                     print("Hidden: " + Player2.hand[i].getName())
@@ -146,14 +146,18 @@ def main():
             else :
                 print("Your total is now: " + str(Player2.getTotal()))
             user_input = input("Would you like to hit or stay? ")
-            if (user_input == "quit"):
+            if (user_input == "quit" or user_input == "q"):
                 print("Thankyou for playing, goodbye!")
                 exit(0)
             if (user_input == "hit"):
                 Player2.hand[hand_index] = cards.draw(deck, cards_dealt)
                 Player2.adjustTotal(Player2.hand[hand_index].getClassification())
+                if (Player2.hand[hand_index].getClassification() == 11):
+                    aces += 1
                 hand_index += 1
+
                 if (Player2.getTotal() > 21 and aces > 0):
+                    print("print reached if statement")
                     cards.aceHighOrLow(Player2)
                 print("Your total is now: " + str(Player2.getTotal()))
 
@@ -188,7 +192,6 @@ def main():
                 Player1.hand[hand_index] = cards.draw(deck, cards_dealt)
                 Player1.adjustTotal(Player1.hand[hand_index].getClassification())
                 hand_index += 1
-                print(Player1.hand)
                 print("\nLength of dealer hand = " + str(len(Player1.hand)))
                 for i in range(0, len(Player1.hand)):
                     print("Hit")
@@ -198,6 +201,9 @@ def main():
                         print("Visible: " + Player1.hand[i].getName())
                 print("Dealer total is now: " + str(Player1.getTotal()))
                 continue
+            if (Player1.getTotal() > 21 and aces > 0):
+                print("print reached if statement")
+                cards.aceHighOrLow(Player1)
             if (dealer_total == Player2.getTotal()):
                 print("PUSH!!!")
                 Player2.setMoney(amount_bet, 1)
@@ -206,12 +212,12 @@ def main():
                 print("Dealer total is now: " + str(Player1.getTotal()))
                 if (Player2.getTotal() > Player1.getTotal()):
                     print("You win $" + str(amount_bet) + "!")
-                    amount_bet = 2*amount_bet
-                    Player2.setMoney(amount_bet, 1)
+                    increment = 2*amount_bet
+                    Player2.setMoney(increment, 1)
                     break
                 else:
                     print("You lose $" + str(amount_bet))
-                    Player2.setMoney(amount_bet, 1)
+                    Player2.setMoney(amount_bet, -1)
                     break
                 break
             if (dealer_total > 21):

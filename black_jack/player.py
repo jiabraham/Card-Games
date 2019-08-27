@@ -45,4 +45,4 @@ class Player:
 
     #Function to adjust total
     def adjustTotal(self, total):
-        self.total += total 
+        self.total += total

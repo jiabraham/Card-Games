@@ -94,7 +94,7 @@ def main():
     user_input = ""
 
     while (True):
-        print("\n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n \n \n")
+        print("\n \n \n \n \n \n \n \n\n \n \n \n \n \n \n \n \n \n \n \n")
 
         user_input = input("Ready to play?")
 
@@ -123,17 +123,20 @@ def main():
         while (amount_bet > Player2.getMoney()):
             amount_bet = int(input("Please enter a valid bet:"))
         actions.bet(Player2, amount_bet)
-        game_total = 21
+
+        aces = 0
         busted = False
         while (True):
             hand_index = 2
             for i in range(0, len(Player2.hand)):
                 if (i == 0):
                     print("Hidden: " + Player2.hand[i].getName())
-                    print(Player2.hand[i].getClassification())
+                    if (Player2.hand[i].getClassification() == 11):
+                        aces += 1
                 else:
                     print("Visible: " + Player2.hand[i].getName())
-                    print(Player2.hand[i].getClassification())
+                    if (Player2.hand[i].getClassification() == 11):
+                        aces += 1
             if (len(Player2.hand) == 2 and Player2.getTotal() == 21):
                 print("Blackjack, congradulations!")
                 break;
@@ -149,30 +152,30 @@ def main():
             if (user_input == "hit"):
                 Player2.hand[hand_index] = cards.draw(deck, cards_dealt)
                 Player2.adjustTotal(Player2.hand[hand_index].getClassification())
-                print("Your total is now: " + str(Player2.getTotal()))
                 hand_index += 1
-                if (Player2.getTotal() > game_total):
+                if (Player2.getTotal() > 21 and aces > 0):
+                    cards.aceHighOrLow(Player2)
+                print("Your total is now: " + str(Player2.getTotal()))
+
+                if (Player2.getTotal() > 21):
                     print("Oops, busted")
                     for i in range(0, len(Player2.hand)):
                         if (i == 0):
                             print("Hidden: " + Player2.hand[i].getName())
-                            print(Player2.hand[i].getClassification())
                         else:
                             print("Visible: " + Player2.hand[i].getName())
-                            print(Player2.hand[i].getClassification())
                     busted = True
-                    actions.endRound(Player2, amount_bet, busted)
+                    actions.endRound(Player2, amount_bet, busted, False)
                     break
             if (user_input == "stay"):
                 print("Your total is " + str(Player2.getTotal()))
                 break
         if (busted):
             continue
-
+        dealer_total = 0
+        hand_index = 2
         while(True):
             print("\nDealer's cards")
-            dealer_total = 0
-            hand_index = 2
             for i in range(0, len(Player1.hand)):
                 dealer_total += Player1.hand[i].getClassification()
             for i in range(0, len(Player1.hand)):
@@ -180,21 +183,25 @@ def main():
                     print("Hidden: " + Player1.hand[i].getName())
                 else:
                     print("Visible: " + Player1.hand[i].getName())
-            if (dealer_total == Player2.getTotal()):
-                print("PUSH!!!")
-                Player2.setMoney(amount_bet, 1)
-                break
+
             if (dealer_total < 17):
                 Player1.hand[hand_index] = cards.draw(deck, cards_dealt)
                 Player1.adjustTotal(Player1.hand[hand_index].getClassification())
                 hand_index += 1
+                print(Player1.hand)
+                print("\nLength of dealer hand = " + str(len(Player1.hand)))
                 for i in range(0, len(Player1.hand)):
+                    print("Hit")
                     if (i == 0):
                         print("Hidden: " + Player1.hand[i].getName())
                     else:
                         print("Visible: " + Player1.hand[i].getName())
                 print("Dealer total is now: " + str(Player1.getTotal()))
                 continue
+            if (dealer_total == Player2.getTotal()):
+                print("PUSH!!!")
+                Player2.setMoney(amount_bet, 1)
+                break
             if (dealer_total > 16 and dealer_total < 22):
                 print("Dealer total is now: " + str(Player1.getTotal()))
                 if (Player2.getTotal() > Player1.getTotal()):
@@ -203,8 +210,9 @@ def main():
                     Player2.setMoney(amount_bet, 1)
                     break
                 else:
-                    busted = True
-                    actions.endRound(Player1, amount_bet, busted)
+                    print("You lose $" + str(amount_bet))
+                    Player2.setMoney(amount_bet, 1)
+                    break
                 break
             if (dealer_total > 21):
                 print("You win $" + str(amount_bet) + "!")

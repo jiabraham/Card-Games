@@ -26,7 +26,7 @@ def setDeck():
         if (value > 0 and value < 10):
             deck[i] = card(str(value+1), value+1)
         if (value == 0):
-            deck[i] = card("Ace", 1)
+            deck[i] = card("Ace", 11)
         if (value == 10):
             deck[i] = card("Jack", 10)
         if (value == 11):

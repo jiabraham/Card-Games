@@ -180,36 +180,40 @@ def main():
         hand_index = 2
         while(True):
             print("\nDealer's cards")
-            for i in range(0, len(Player1.hand)):
-                dealer_total += Player1.hand[i].getClassification()
+
             for i in range(0, len(Player1.hand)):
                 if (i == 0):
                     print("Hidden: " + Player1.hand[i].getName())
                 else:
                     print("Visible: " + Player1.hand[i].getName())
-
-            if (dealer_total < 17):
+            #INCREMENT ACE COUNT PROPERLY
+            if (Player1.getTotal() < 17):
                 Player1.hand[hand_index] = cards.draw(deck, cards_dealt)
                 Player1.adjustTotal(Player1.hand[hand_index].getClassification())
                 hand_index += 1
                 print("\nLength of dealer hand = " + str(len(Player1.hand)))
+                print("Hit")
                 for i in range(0, len(Player1.hand)):
-                    print("Hit")
                     if (i == 0):
                         print("Hidden: " + Player1.hand[i].getName())
                     else:
                         print("Visible: " + Player1.hand[i].getName())
                 print("Dealer total is now: " + str(Player1.getTotal()))
                 continue
+
             if (Player1.getTotal() > 21 and aces > 0):
                 print("print reached if statement")
                 cards.aceHighOrLow(Player1)
-            if (dealer_total == Player2.getTotal()):
+                dealer_total = Player1.getTotal()
+
+            if (Player1.getTotal() == Player2.getTotal()):
                 print("PUSH!!!")
                 Player2.setMoney(amount_bet, 1)
                 break
-            if (dealer_total > 16 and dealer_total < 22):
+
+            if (Player1.getTotal() > 16 and Player1.getTotal() < 22):
                 print("Dealer total is now: " + str(Player1.getTotal()))
+                print("Your total = " + str(Player2.getTotal()) + " Dealer total = " + str(Player1.getTotal()))
                 if (Player2.getTotal() > Player1.getTotal()):
                     print("You win $" + str(amount_bet) + "!")
                     increment = 2*amount_bet
@@ -220,7 +224,8 @@ def main():
                     Player2.setMoney(amount_bet, -1)
                     break
                 break
-            if (dealer_total > 21):
+            if (Player1.getTotal() > 21):
+                print("Dealer total is now: " + str(Player1.getTotal()))
                 print("You win $" + str(amount_bet) + "!")
                 amount_bet = 2*amount_bet
                 Player2.setMoney(amount_bet, 1)

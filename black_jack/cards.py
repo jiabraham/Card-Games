@@ -99,6 +99,8 @@ def aceHighOrLow(Player):
             optimal_total_no_11 += 1
         else:
             optimal_total_no_11 += Player.hand[i].getClassification()
+    if (optimal_total_with_11 == 21):
+        Player.setTotal(21)
     if (optimal_total_with_11 > 21):
         Player.setTotal(optimal_total_no_11)
     else:

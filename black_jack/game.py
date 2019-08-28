@@ -184,8 +184,10 @@ def main():
             for i in range(0, len(Player1.hand)):
                 if (i == 0):
                     print("Hidden: " + Player1.hand[i].getName())
+                    aces += 1
                 else:
                     print("Visible: " + Player1.hand[i].getName())
+                    aces += 1
             #INCREMENT ACE COUNT PROPERLY
             if (Player1.getTotal() < 17):
                 Player1.hand[hand_index] = cards.draw(deck, cards_dealt)
@@ -204,7 +206,6 @@ def main():
             if (Player1.getTotal() > 21 and aces > 0):
                 print("print reached if statement")
                 cards.aceHighOrLow(Player1)
-                dealer_total = Player1.getTotal()
 
             if (Player1.getTotal() == Player2.getTotal()):
                 print("PUSH!!!")
@@ -213,7 +214,6 @@ def main():
 
             if (Player1.getTotal() > 16 and Player1.getTotal() < 22):
                 print("Dealer total is now: " + str(Player1.getTotal()))
-                print("Your total = " + str(Player2.getTotal()) + " Dealer total = " + str(Player1.getTotal()))
                 if (Player2.getTotal() > Player1.getTotal()):
                     print("You win $" + str(amount_bet) + "!")
                     increment = 2*amount_bet

@@ -1,1 +1,1 @@
-
+This is a Spades bettor written in python. For every round played in Spades, a player must make an initial bet as to how many hands they will win. This input of this program is a hand of 13 cards and prints an optimal score based on the traditional betting algorithm.

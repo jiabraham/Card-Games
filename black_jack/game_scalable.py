@@ -184,7 +184,7 @@ def main():
                 if (player_vector[PLAYER_NUMBER-1].getTotal() == player_vector[i].getTotal()):
                     print("PUSH!!!")
                     player_vector[i].setMoney(amount_bet, 1)
-                    break
+
 
                 if (player_vector[PLAYER_NUMBER-1].getTotal() > 16 and player_vector[PLAYER_NUMBER-1].getTotal() < 22):
                     print("Dealer total is now: " + str(player_vector[PLAYER_NUMBER-1].getTotal()))
@@ -192,17 +192,16 @@ def main():
                         print("You win $" + str(amount_bet) + "!")
                         increment = 2*amount_bet
                         player_vector[i].setMoney(increment, 1)
-                        break
+
                     else:
                         print("You lose $" + str(amount_bet))
-                        break
-                    break
+
                 if (player_vector[PLAYER_NUMBER-1].getTotal() > 21):
                     print("Dealer total is now: " + str(player_vector[PLAYER_NUMBER-1].getTotal()))
                     print("You win $" + str(amount_bet) + "!")
                     amount_bet = 2*amount_bet
                     player_vector[i].setMoney(amount_bet, 1)
-                    break
+                    
         continue
 
 main()

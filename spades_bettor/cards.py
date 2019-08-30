@@ -50,18 +50,28 @@ def setCardsDealt():
         cards_dealt[i] = 0
     return cards_dealt
 
-def sortHand(hand_vec):
+def histogram(hand_vec):
+    histogram = {}
+    for i in range(0, 15):
+        histogram[i] = 0
+
+    for i in range(0, 7):
+        histogram[hand_vec[i].getClassification()] += 1
+
+    return histogram
+
+def sortHand(suit_vec):
     #Simple sort for only 7 elements
     """This function sorts a hand based on classifications using simple sort.
     Args:
-        hand_vec: a vector of 7 cards that represents the hand of a player.
+        suit_vec: a vector of cards that represents the cards of a certain
+            suit that a user has
     Returns:
         The same vector sorted by classification.
     """
-    for i in range(0,7):
-        for j in range(0,7):
-            if (hand_vec[j].classification > hand_vec[i].classification):
+    for i in range(0, len(suit_vec)):
+        for j in range(0, len(suit_vec)):
+            if (suit_vec[j].classification > hand_vec[i].classification):
                 temp = hand_vec[i]
-                hand_vec[i] = hand_vec[j]
-                hand_vec[j] = temp
-    return hand_vec
+                suit_vec[i] = hand_vec[j]
+                suit_vec[j] = temp

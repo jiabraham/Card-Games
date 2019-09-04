@@ -7,35 +7,6 @@ import cards
 #Separate hand by suit, sort by rank after input
 
 
-#Could have used Python's Merge function here, but I thought this would
-#be a good exercise
-def combineVectors(vec0, vec1, vec2, vec3):
-
-    sorted_hand = {}
-    #For scalability you can add vec lengths
-    #For our purposes this number should always be 13
-    hand_length = len(vec0) + len(vec1) + len(vec2) + len(vec3)
-    vec0_index = 0
-    vec1_index = len(vec0)
-    vec2_index = len(vec0)+ len(vec1)
-    vec3_index = len(vec0)+ len(vec1) + len(vec2)
-    for i in range(0, hand_length):
-        if (i < vec1_index):
-            sorted_hand[i] = vec0[vec0_index]
-            vec0_index += 1
-        if (i < vec2_index):
-            sorted_hand[i] = vec1[vec1_index]
-            vec1_index += 1
-        if (i < vec3_index):
-            sorted_hand[i] = vec2[vec2_index]
-            vec2_index += 1
-        else:
-            sorted_hand[i] = vec3[vec3_index]
-            vec3_index += 1
-
-    return sorted_hand
-
-
 def main():
     spades = {}
     hearts = {}
